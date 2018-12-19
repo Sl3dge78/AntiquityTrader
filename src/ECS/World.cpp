@@ -49,7 +49,7 @@ namespace ECS
         for (std::vector<Entity *>::iterator it = entityList.begin() ; it != entityList.end(); )
         {
             delete *it;
-            entityList.erase(it);
+            it = entityList.erase(it);
         }
     }
 

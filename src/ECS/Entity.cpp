@@ -21,11 +21,12 @@ namespace ECS
     }
 
     void Entity::RemoveAllComponents(){
-        for (std::vector<Component *>::iterator it = components.begin() ; it != components.end(); )
+
+		for (std::vector<Component *>::iterator it = components.begin() ; it != components.end(); )
         {
                 //We found the component !
                 delete *it;
-                components.erase(it);
+                it = components.erase(it);
         }
     }
 }
