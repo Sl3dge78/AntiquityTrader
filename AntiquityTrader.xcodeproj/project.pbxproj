@@ -7,7 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8A3B2ADA21C73B8100F98D76 /* Core.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A3B2AD321C73B8100F98D76 /* Core.cpp */; };
+		8A3B2AFA21C8331C00F98D76 /* liballegro.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A3B2AF921C8331C00F98D76 /* liballegro.dylib */; };
 		8A815BAD21C7372A008FB94F /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A815BAC21C7372A008FB94F /* main.cpp */; };
+		8A8BF03421C8336D002FD5EA /* liballegro_font.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A8BF03321C8336D002FD5EA /* liballegro_font.dylib */; };
+		8A8BF03621C8343A002FD5EA /* liballegro_main.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A8BF03521C8343A002FD5EA /* liballegro_main.dylib */; };
+		8A8BF03A21C8518F002FD5EA /* Component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8BF03821C8518F002FD5EA /* Component.cpp */; };
+		8A8BF04321C85409002FD5EA /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8BF04121C85409002FD5EA /* Entity.cpp */; };
+		8A8BF04621C854D0002FD5EA /* System.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8BF04421C854D0002FD5EA /* System.cpp */; };
+		8A8BF04A21C855B9002FD5EA /* RendererSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8BF04821C855B9002FD5EA /* RendererSystem.cpp */; };
+		8A8BF04D21C85A24002FD5EA /* World.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8BF04B21C85A24002FD5EA /* World.cpp */; };
+		8A8BF05621CAE7BD002FD5EA /* DebugTools.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8BF05421CAE7BD002FD5EA /* DebugTools.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -23,8 +33,29 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8A3B2AC721C73B7F00F98D76 /* Core.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Core.h; sourceTree = "<group>"; };
+		8A3B2ACB21C73B8000F98D76 /* Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
+		8A3B2AD321C73B8100F98D76 /* Core.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Core.cpp; sourceTree = "<group>"; };
+		8A3B2ADC21C73C2F00F98D76 /* main.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
+		8A3B2AF921C8331C00F98D76 /* liballegro.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = liballegro.dylib; path = ../../../../../../usr/local/lib/liballegro.dylib; sourceTree = "<group>"; };
 		8A815BA921C7372A008FB94F /* AntiquityTrader */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = AntiquityTrader; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A815BAC21C7372A008FB94F /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		8A8BF03321C8336D002FD5EA /* liballegro_font.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = liballegro_font.dylib; path = ../../../../../../usr/local/lib/liballegro_font.dylib; sourceTree = "<group>"; };
+		8A8BF03521C8343A002FD5EA /* liballegro_main.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = liballegro_main.dylib; path = ../../../../../../usr/local/lib/liballegro_main.dylib; sourceTree = "<group>"; };
+		8A8BF03821C8518F002FD5EA /* Component.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Component.cpp; sourceTree = "<group>"; };
+		8A8BF03921C8518F002FD5EA /* Component.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Component.h; sourceTree = "<group>"; };
+		8A8BF03F21C85394002FD5EA /* Components.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Components.h; sourceTree = "<group>"; };
+		8A8BF04121C85409002FD5EA /* Entity.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Entity.cpp; sourceTree = "<group>"; };
+		8A8BF04221C85409002FD5EA /* Entity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Entity.h; sourceTree = "<group>"; };
+		8A8BF04421C854D0002FD5EA /* System.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = System.cpp; sourceTree = "<group>"; };
+		8A8BF04521C854D0002FD5EA /* System.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = System.h; sourceTree = "<group>"; };
+		8A8BF04821C855B9002FD5EA /* RendererSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RendererSystem.cpp; sourceTree = "<group>"; };
+		8A8BF04921C855B9002FD5EA /* RendererSystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RendererSystem.h; sourceTree = "<group>"; };
+		8A8BF04B21C85A24002FD5EA /* World.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = World.cpp; sourceTree = "<group>"; };
+		8A8BF04C21C85A24002FD5EA /* World.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = World.h; sourceTree = "<group>"; };
+		8A8BF04E21C8710C002FD5EA /* ECS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ECS.h; sourceTree = "<group>"; };
+		8A8BF05421CAE7BD002FD5EA /* DebugTools.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DebugTools.cpp; sourceTree = "<group>"; };
+		8A8BF05521CAE7BD002FD5EA /* DebugTools.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DebugTools.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,17 +63,55 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A3B2AFA21C8331C00F98D76 /* liballegro.dylib in Frameworks */,
+				8A8BF03621C8343A002FD5EA /* liballegro_main.dylib in Frameworks */,
+				8A8BF03421C8336D002FD5EA /* liballegro_font.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8A3B2AC321C73B4300F98D76 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				8A8BF03F21C85394002FD5EA /* Components.h */,
+				8A8BF04821C855B9002FD5EA /* RendererSystem.cpp */,
+				8A8BF04921C855B9002FD5EA /* RendererSystem.h */,
+				8A3B2ADB21C73B8800F98D76 /* ECS */,
+				8A3B2AD321C73B8100F98D76 /* Core.cpp */,
+				8A3B2AC721C73B7F00F98D76 /* Core.h */,
+				8A3B2ACB21C73B8000F98D76 /* Macros.h */,
+				8A815BAC21C7372A008FB94F /* main.cpp */,
+				8A3B2ADC21C73C2F00F98D76 /* main.h */,
+				8A8BF05421CAE7BD002FD5EA /* DebugTools.cpp */,
+				8A8BF05521CAE7BD002FD5EA /* DebugTools.hpp */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		8A3B2ADB21C73B8800F98D76 /* ECS */ = {
+			isa = PBXGroup;
+			children = (
+				8A8BF03821C8518F002FD5EA /* Component.cpp */,
+				8A8BF03921C8518F002FD5EA /* Component.h */,
+				8A8BF04121C85409002FD5EA /* Entity.cpp */,
+				8A8BF04221C85409002FD5EA /* Entity.h */,
+				8A8BF04421C854D0002FD5EA /* System.cpp */,
+				8A8BF04521C854D0002FD5EA /* System.h */,
+				8A8BF04B21C85A24002FD5EA /* World.cpp */,
+				8A8BF04C21C85A24002FD5EA /* World.h */,
+				8A8BF04E21C8710C002FD5EA /* ECS.h */,
+			);
+			path = ECS;
+			sourceTree = "<group>";
+		};
 		8A815BA021C7372A008FB94F = {
 			isa = PBXGroup;
 			children = (
-				8A815BAB21C7372A008FB94F /* AntiquityTrader */,
+				8A3B2AC321C73B4300F98D76 /* src */,
 				8A815BAA21C7372A008FB94F /* Products */,
+				8A815BB321C737CA008FB94F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,12 +123,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		8A815BAB21C7372A008FB94F /* AntiquityTrader */ = {
+		8A815BB321C737CA008FB94F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				8A815BAC21C7372A008FB94F /* main.cpp */,
+				8A8BF03521C8343A002FD5EA /* liballegro_main.dylib */,
+				8A8BF03321C8336D002FD5EA /* liballegro_font.dylib */,
+				8A3B2AF921C8331C00F98D76 /* liballegro.dylib */,
 			);
-			path = AntiquityTrader;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -118,7 +189,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A8BF04621C854D0002FD5EA /* System.cpp in Sources */,
+				8A8BF04D21C85A24002FD5EA /* World.cpp in Sources */,
+				8A8BF04A21C855B9002FD5EA /* RendererSystem.cpp in Sources */,
+				8A8BF04321C85409002FD5EA /* Entity.cpp in Sources */,
 				8A815BAD21C7372A008FB94F /* main.cpp in Sources */,
+				8A8BF03A21C8518F002FD5EA /* Component.cpp in Sources */,
+				8A3B2ADA21C73B8100F98D76 /* Core.cpp in Sources */,
+				8A8BF05621CAE7BD002FD5EA /* DebugTools.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -241,6 +319,8 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LC9WXAB7H2;
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -250,6 +330,8 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LC9WXAB7H2;
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
