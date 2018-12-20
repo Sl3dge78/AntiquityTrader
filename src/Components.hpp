@@ -45,4 +45,9 @@ public:
     
 };
 
+struct PlayerController : public ECS::Component {
+
+    
+};
+
 #endif /* Components_h */

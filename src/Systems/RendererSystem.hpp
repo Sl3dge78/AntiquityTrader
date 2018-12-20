@@ -9,7 +9,6 @@
 #ifndef RendererSystem_hpp
 #define RendererSystem_hpp
 
-//#include <vector>
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_font.h>
 

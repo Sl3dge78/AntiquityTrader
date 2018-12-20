@@ -49,12 +49,6 @@ Core::Core()
     
     DebugLog("Init: World\n");
     
-    rendererSystem = new RendererSystem();
-    if(!rendererSystem)
-        throw runtime_error("Failed to initialize: Renderer System\n");
-    
-    DebugLog("Init: Systems\n");
-    
 	keepCoreRunning = true;
     
 	DebugLog("--- App Initialized! ---\n");
@@ -127,11 +121,19 @@ void Core::Start()
     
     player->AddComponent<FontRenderer>(coreFont, '@', al_map_rgb(150, 0, 0));
     player->AddComponent<Transform>();
+    player->AddComponent<PlayerController>();
     
     /*
      *   SYSTEMS
      */
+    
+    rendererSystem = world->AddSystem<RendererSystem>();
+    inputSystem = world ->AddSystem<InputSystem>();
+    
     rendererSystem->AddEntity(player);
+    inputSystem->AddEntity(player);
+    inputSystem->ChangeCurrentFocus(player);
+    
 }
 
 /// Update logic
@@ -153,10 +155,14 @@ void Core::Update()
 	case ALLEGRO_EVENT_TIMER:
 		redraw = true;
 		break;
-	
+            
+        case ALLEGRO_EVENT_KEY_UP:
+        case ALLEGRO_EVENT_KEY_DOWN:
+        inputSystem->Update(&ev);
+        break;
+            
 	default:
-		//GAME EVENTS
-		
+        
 		break;
 
 	}

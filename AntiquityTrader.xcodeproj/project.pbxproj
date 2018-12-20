@@ -18,6 +18,7 @@
 		8A8BF04A21C855B9002FD5EA /* RendererSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8BF04821C855B9002FD5EA /* RendererSystem.cpp */; };
 		8A8BF04D21C85A24002FD5EA /* World.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8BF04B21C85A24002FD5EA /* World.cpp */; };
 		8A8BF05621CAE7BD002FD5EA /* DebugTools.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8BF05421CAE7BD002FD5EA /* DebugTools.cpp */; };
+		8A8BF05A21CC305B002FD5EA /* InputSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8BF05821CC305B002FD5EA /* InputSystem.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -56,6 +57,8 @@
 		8A8BF04E21C8710C002FD5EA /* ECS.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ECS.hpp; sourceTree = "<group>"; };
 		8A8BF05421CAE7BD002FD5EA /* DebugTools.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DebugTools.cpp; sourceTree = "<group>"; };
 		8A8BF05521CAE7BD002FD5EA /* DebugTools.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DebugTools.hpp; sourceTree = "<group>"; };
+		8A8BF05821CC305B002FD5EA /* InputSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = InputSystem.cpp; sourceTree = "<group>"; };
+		8A8BF05921CC305B002FD5EA /* InputSystem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = InputSystem.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +140,8 @@
 			children = (
 				8A8BF04821C855B9002FD5EA /* RendererSystem.cpp */,
 				8A8BF04921C855B9002FD5EA /* RendererSystem.hpp */,
+				8A8BF05821CC305B002FD5EA /* InputSystem.cpp */,
+				8A8BF05921CC305B002FD5EA /* InputSystem.hpp */,
 			);
 			path = Systems;
 			sourceTree = "<group>";
@@ -198,6 +203,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A8BF04621C854D0002FD5EA /* System.cpp in Sources */,
+				8A8BF05A21CC305B002FD5EA /* InputSystem.cpp in Sources */,
 				8A8BF04D21C85A24002FD5EA /* World.cpp in Sources */,
 				8A8BF04A21C855B9002FD5EA /* RendererSystem.cpp in Sources */,
 				8A8BF04321C85409002FD5EA /* Entity.cpp in Sources */,
@@ -327,6 +333,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LC9WXAB7H2;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				HEADER_SEARCH_PATHS = /usr/local/include;
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -338,6 +345,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LC9WXAB7H2;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				HEADER_SEARCH_PATHS = /usr/local/include;
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				PRODUCT_NAME = "$(TARGET_NAME)";

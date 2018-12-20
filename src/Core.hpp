@@ -12,7 +12,8 @@
 
 
 #include "ECS/ECS.hpp"
-#include "RendererSystem.hpp"
+#include "Systems/RendererSystem.hpp"
+#include "Systems/InputSystem.hpp"
 #include "Components.hpp"
 
 
@@ -51,6 +52,7 @@ private:
     ECS::World * world;
     
     RendererSystem * rendererSystem;
+    InputSystem * inputSystem;
     
     ECS::Entity * player;
 	

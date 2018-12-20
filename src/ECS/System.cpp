@@ -12,6 +12,7 @@ namespace ECS
 
     void System::AddEntity(Entity * e) {
         m_entities.push_back(e);
+        OnEntityAdded(e);
     }
 
 

@@ -13,7 +13,6 @@
 
 namespace ECS
 {
-
     class Entity;
 
     class System {
@@ -27,6 +26,9 @@ namespace ECS
         
         protected:
             std::vector<Entity *> m_entities;
+        
+        private:
+        virtual void OnEntityAdded(Entity * entity) {}
     };
     inline System::~System() = default;
 

@@ -10,7 +10,6 @@
 
 RendererSystem::RendererSystem()
 {
-    DebugLog("Renderer System Created!\n");
 }
 
 RendererSystem::~RendererSystem()
@@ -33,5 +32,4 @@ void RendererSystem::Draw() {
                      &(rdr->character));
         
     }
-    
 }
