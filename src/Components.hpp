@@ -6,13 +6,13 @@
 //  Copyright © 2018 Sledge. All rights reserved.
 //
 
-#ifndef Components_h
-#define Components_h
+#ifndef Components_hpp
+#define Components_hpp
 
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_font.h>
 
-#include "ECS/ECS.h"
+#include "ECS/ECS.hpp"
 
 class FontRenderer : public ECS::Component {
 public:

@@ -6,8 +6,8 @@
 //  Copyright © 2018 Sledge. All rights reserved.
 //
 
-#ifndef Component_h
-#define Component_h
+#ifndef Component_hpp
+#define Component_hpp
 namespace ECS
 {
     class Component {

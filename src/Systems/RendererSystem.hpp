@@ -6,17 +6,17 @@
 //  Copyright © 2018 Sledge. All rights reserved.
 //
 
-#ifndef RendererSystem_h
-#define RendererSystem_h
+#ifndef RendererSystem_hpp
+#define RendererSystem_hpp
 
 //#include <vector>
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_font.h>
 
-#include "Macros.h"
+#include "Macros.hpp"
 
-#include "ECS/ECS.h"
-#include "Components.h"
+#include "../ECS/ECS.hpp"
+#include "Components.hpp"
 
 class RendererSystem : public ECS::System
 {

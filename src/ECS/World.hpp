@@ -6,14 +6,14 @@
 //  Copyright © 2018 Sledge. All rights reserved.
 //
 
-#ifndef World_h
-#define World_h
+#ifndef World_hpp
+#define World_hpp
 
 #include <vector>
 
-#include "Entity.h"
-#include "Component.h"
-#include "System.h"
+#include "Entity.hpp"
+#include "Component.hpp"
+#include "System.hpp"
 
 namespace ECS
 {

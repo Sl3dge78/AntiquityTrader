@@ -6,8 +6,8 @@
 //  Copyright © 2018 Sledge. All rights reserved.
 //
 
-#ifndef System_h
-#define System_h
+#ifndef System_hpp
+#define System_hpp
 
 #include <vector>
 

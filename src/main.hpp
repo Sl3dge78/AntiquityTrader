@@ -6,15 +6,14 @@
 //  Copyright © 2018 Sledge. All rights reserved.
 //
 #pragma once
-#ifndef main_h
-#define main_h
+#ifndef main_hpp
+#define main_hpp
 
 #include <allegro5/allegro.h>
-#include <stdio.h>
 #include <stdexcept>
 
 #include "DebugTools.hpp"
-#include "Core.h"
+#include "Core.hpp"
 
 
 #endif /* main_h */

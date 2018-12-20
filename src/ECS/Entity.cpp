@@ -6,7 +6,7 @@
 //  Copyright © 2018 Sledge. All rights reserved.
 //
 
-#include "Entity.h"
+#include "Entity.hpp"
 
 namespace ECS
 {
@@ -24,7 +24,6 @@ namespace ECS
 
 		for (std::vector<Component *>::iterator it = components.begin() ; it != components.end(); )
         {
-                //We found the component !
                 delete *it;
                 it = components.erase(it);
         }

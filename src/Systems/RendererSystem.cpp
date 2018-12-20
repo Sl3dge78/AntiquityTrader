@@ -6,7 +6,7 @@
 //  Copyright © 2018 Sledge. All rights reserved.
 //
 #include "DebugTools.hpp"
-#include "RendererSystem.h"
+#include "RendererSystem.hpp"
 
 RendererSystem::RendererSystem()
 {

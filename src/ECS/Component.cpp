@@ -6,4 +6,4 @@
 //  Copyright © 2018 Sledge. All rights reserved.
 //
 
-#include "Component.h"
+#include "Component.hpp"

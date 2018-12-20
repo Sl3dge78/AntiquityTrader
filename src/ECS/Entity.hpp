@@ -6,15 +6,15 @@
 //  Copyright © 2018 Sledge. All rights reserved.
 //
 
-#ifndef Entity_h
-#define Entity_h
+#ifndef Entity_hpp
+#define Entity_hpp
 
 #include <utility>
 #include <vector>
 #include <stdexcept>
 #include <string>
 
-#include "Component.h"
+#include "Component.hpp"
 
 namespace ECS
 {
@@ -25,7 +25,6 @@ namespace ECS
     private:
         int ID;
         World * world;
-        //TODO globalise list of components
         std::vector<Component *> components;
         
         

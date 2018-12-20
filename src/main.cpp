@@ -5,7 +5,7 @@
 //  Created by Guillaume Collin on 17/12/2018.
 //  Copyright © 2018 Sledge. All rights reserved.
 //
-#include "main.h"
+#include "main.hpp"
 
 int main(int argc, char **argv)
 {

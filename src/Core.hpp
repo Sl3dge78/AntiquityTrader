@@ -1,6 +1,6 @@
 #pragma once
-#ifndef Core_h
-#define Core_h
+#ifndef Core_hpp
+#define Core_hpp
 
 #include <stdexcept>
 #include <string>
@@ -8,12 +8,12 @@
 #include <allegro5/allegro_font.h>
 
 #include "DebugTools.hpp"
-#include "Macros.h"
+#include "Macros.hpp"
 
 
-#include "ECS/ECS.h"
-#include "RendererSystem.h"
-#include "Components.h"
+#include "ECS/ECS.hpp"
+#include "RendererSystem.hpp"
+#include "Components.hpp"
 
 
 ///Manages the engine. Initializes, updates and manages app events.

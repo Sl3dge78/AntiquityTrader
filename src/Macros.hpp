@@ -1,6 +1,6 @@
 #pragma once
-#ifndef macros_h
-#define macros_h
+#ifndef macros_hpp
+#define macros_hpp
 
 #define FRAMERATE 30.0
 

@@ -6,7 +6,7 @@
 //  Copyright © 2018 Sledge. All rights reserved.
 //
 
-#include "World.h"
+#include "World.hpp"
 
 namespace ECS
 {

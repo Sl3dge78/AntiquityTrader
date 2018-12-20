@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <string>
 #include <time.h>
+#include <ctime>
 #include <chrono>
 #include <iostream>
 

@@ -6,12 +6,12 @@
 //  Copyright © 2018 Sledge. All rights reserved.
 //
 
-#ifndef ECS_h
-#define ECS_h
+#ifndef ECS_hpp
+#define ECS_hpp
 
 namespace ECS
 {}
 
-#include "World.h"
+#include "World.hpp"
 
 #endif /* ECS_h */
