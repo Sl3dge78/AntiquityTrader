@@ -23,9 +23,12 @@ namespace ECS
             void Update();
             void Draw();
             std::vector<Entity *> GetEntities();
+            void SetIsActive(bool val);
+            bool GetIsActive();
         
         protected:
             std::vector<Entity *> m_entities;
+            bool isActive = true;
         
         private:
         virtual void OnEntityAdded(Entity * entity) {}

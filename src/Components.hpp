@@ -16,17 +16,17 @@
 
 class FontRenderer : public ECS::Component {
 public:
-    FontRenderer(ALLEGRO_FONT * font, char character = 'x', ALLEGRO_COLOR color = al_map_rgb(255, 255, 255)):
+    FontRenderer(ALLEGRO_FONT * font, char text = 'x', ALLEGRO_COLOR color = al_map_rgb(255, 255, 255)):
     font(font),
     color(color),
-    character(character)
+    text(text)
     {
         
     };
     ~FontRenderer() = default;
     ALLEGRO_FONT * font;
     ALLEGRO_COLOR color;
-    char character;
+    char text;
     
 };
 
@@ -45,9 +45,4 @@ public:
     
 };
 
-struct PlayerController : public ECS::Component {
-
-    
-};
-
-#endif /* Components_h */
+#endif /* Components_hpp */

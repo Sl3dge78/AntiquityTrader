@@ -15,10 +15,12 @@
 		8A8BF03A21C8518F002FD5EA /* Component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8BF03821C8518F002FD5EA /* Component.cpp */; };
 		8A8BF04321C85409002FD5EA /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8BF04121C85409002FD5EA /* Entity.cpp */; };
 		8A8BF04621C854D0002FD5EA /* System.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8BF04421C854D0002FD5EA /* System.cpp */; };
-		8A8BF04A21C855B9002FD5EA /* RendererSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8BF04821C855B9002FD5EA /* RendererSystem.cpp */; };
+		8A8BF04A21C855B9002FD5EA /* RenderingSystems.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8BF04821C855B9002FD5EA /* RenderingSystems.cpp */; };
 		8A8BF04D21C85A24002FD5EA /* World.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8BF04B21C85A24002FD5EA /* World.cpp */; };
 		8A8BF05621CAE7BD002FD5EA /* DebugTools.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8BF05421CAE7BD002FD5EA /* DebugTools.cpp */; };
-		8A8BF05A21CC305B002FD5EA /* InputSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8BF05821CC305B002FD5EA /* InputSystem.cpp */; };
+		8A8BF05A21CC305B002FD5EA /* PlayerInputSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8BF05821CC305B002FD5EA /* PlayerInputSystem.cpp */; };
+		8A8BF05C21CC4941002FD5EA /* Components.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8BF05B21CC4941002FD5EA /* Components.cpp */; };
+		8AF739C621CC62540035E2AD /* Map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AF739C421CC62540035E2AD /* Map.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -50,15 +52,18 @@
 		8A8BF04221C85409002FD5EA /* Entity.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; path = Entity.hpp; sourceTree = "<group>"; };
 		8A8BF04421C854D0002FD5EA /* System.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = System.cpp; sourceTree = "<group>"; };
 		8A8BF04521C854D0002FD5EA /* System.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; path = System.hpp; sourceTree = "<group>"; };
-		8A8BF04821C855B9002FD5EA /* RendererSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RendererSystem.cpp; sourceTree = "<group>"; };
-		8A8BF04921C855B9002FD5EA /* RendererSystem.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; path = RendererSystem.hpp; sourceTree = "<group>"; };
+		8A8BF04821C855B9002FD5EA /* RenderingSystems.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RenderingSystems.cpp; sourceTree = "<group>"; };
+		8A8BF04921C855B9002FD5EA /* RenderingSystems.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; path = RenderingSystems.hpp; sourceTree = "<group>"; };
 		8A8BF04B21C85A24002FD5EA /* World.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = World.cpp; sourceTree = "<group>"; };
 		8A8BF04C21C85A24002FD5EA /* World.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = World.hpp; sourceTree = "<group>"; };
 		8A8BF04E21C8710C002FD5EA /* ECS.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ECS.hpp; sourceTree = "<group>"; };
 		8A8BF05421CAE7BD002FD5EA /* DebugTools.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DebugTools.cpp; sourceTree = "<group>"; };
 		8A8BF05521CAE7BD002FD5EA /* DebugTools.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DebugTools.hpp; sourceTree = "<group>"; };
-		8A8BF05821CC305B002FD5EA /* InputSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = InputSystem.cpp; sourceTree = "<group>"; };
-		8A8BF05921CC305B002FD5EA /* InputSystem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = InputSystem.hpp; sourceTree = "<group>"; };
+		8A8BF05821CC305B002FD5EA /* PlayerInputSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerInputSystem.cpp; sourceTree = "<group>"; };
+		8A8BF05921CC305B002FD5EA /* PlayerInputSystem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PlayerInputSystem.hpp; sourceTree = "<group>"; };
+		8A8BF05B21CC4941002FD5EA /* Components.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Components.cpp; sourceTree = "<group>"; };
+		8AF739C421CC62540035E2AD /* Map.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Map.cpp; sourceTree = "<group>"; };
+		8AF739C521CC62540035E2AD /* Map.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Map.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +85,9 @@
 			children = (
 				8A8BF05721CB132F002FD5EA /* Systems */,
 				8A8BF03F21C85394002FD5EA /* Components.hpp */,
+				8A8BF05B21CC4941002FD5EA /* Components.cpp */,
+				8AF739C421CC62540035E2AD /* Map.cpp */,
+				8AF739C521CC62540035E2AD /* Map.hpp */,
 				8A3B2ADB21C73B8800F98D76 /* ECS */,
 				8A3B2AD321C73B8100F98D76 /* Core.cpp */,
 				8A3B2AC721C73B7F00F98D76 /* Core.hpp */,
@@ -138,10 +146,10 @@
 		8A8BF05721CB132F002FD5EA /* Systems */ = {
 			isa = PBXGroup;
 			children = (
-				8A8BF04821C855B9002FD5EA /* RendererSystem.cpp */,
-				8A8BF04921C855B9002FD5EA /* RendererSystem.hpp */,
-				8A8BF05821CC305B002FD5EA /* InputSystem.cpp */,
-				8A8BF05921CC305B002FD5EA /* InputSystem.hpp */,
+				8A8BF04821C855B9002FD5EA /* RenderingSystems.cpp */,
+				8A8BF04921C855B9002FD5EA /* RenderingSystems.hpp */,
+				8A8BF05821CC305B002FD5EA /* PlayerInputSystem.cpp */,
+				8A8BF05921CC305B002FD5EA /* PlayerInputSystem.hpp */,
 			);
 			path = Systems;
 			sourceTree = "<group>";
@@ -203,9 +211,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A8BF04621C854D0002FD5EA /* System.cpp in Sources */,
-				8A8BF05A21CC305B002FD5EA /* InputSystem.cpp in Sources */,
+				8A8BF05A21CC305B002FD5EA /* PlayerInputSystem.cpp in Sources */,
 				8A8BF04D21C85A24002FD5EA /* World.cpp in Sources */,
-				8A8BF04A21C855B9002FD5EA /* RendererSystem.cpp in Sources */,
+				8A8BF05C21CC4941002FD5EA /* Components.cpp in Sources */,
+				8A8BF04A21C855B9002FD5EA /* RenderingSystems.cpp in Sources */,
+				8AF739C621CC62540035E2AD /* Map.cpp in Sources */,
 				8A8BF04321C85409002FD5EA /* Entity.cpp in Sources */,
 				8A815BAD21C7372A008FB94F /* main.cpp in Sources */,
 				8A8BF03A21C8518F002FD5EA /* Component.cpp in Sources */,

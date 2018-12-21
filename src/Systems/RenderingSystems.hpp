@@ -17,13 +17,12 @@
 #include "../ECS/ECS.hpp"
 #include "Components.hpp"
 
-class RendererSystem : public ECS::System
+struct ObjectRendererSystem : public ECS::System
 {
     public :
-    RendererSystem();
-    ~RendererSystem();
     void Draw();
-    
 };
+
+
 
 #endif /* RendererSystem_hpp */

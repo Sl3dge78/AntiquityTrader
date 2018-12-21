@@ -5,17 +5,7 @@
 //  Created by Guillaume Collin on 17/12/2018.
 //  Copyright © 2018 Sledge. All rights reserved.
 //
-#include "DebugTools.hpp"
-#include "ObjectRendererSystem.hpp"
-
-ObjectRendererSystem::ObjectRendererSystem()
-{
-}
-
-ObjectRendererSystem::~ObjectRendererSystem()
-{
-    
-}
+#include "RenderingSystems.hpp"
 
 void ObjectRendererSystem::Draw() {
     
@@ -29,7 +19,9 @@ void ObjectRendererSystem::Draw() {
                      trfm->Transform::posX * TILE_WIDTH,
                      trfm->Transform::posY * TILE_HEIGHT,
                      ALLEGRO_ALIGN_LEFT,
-                     &(rdr->character));
+                     &(rdr->text));
         
     }
 }
+
+

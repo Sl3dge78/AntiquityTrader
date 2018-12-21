@@ -12,9 +12,10 @@
 
 
 #include "ECS/ECS.hpp"
-#include "Systems/RendererSystem.hpp"
-#include "Systems/InputSystem.hpp"
+#include "Systems/RenderingSystems.hpp"
+#include "Systems/PlayerInputSystem.hpp"
 #include "Components.hpp"
+#include "Map.hpp"
 
 
 ///Manages the engine. Initializes, updates and manages app events.
@@ -30,9 +31,9 @@ public:
 	static float previousTime;
 
 private:
-	ALLEGRO_DISPLAY * display;
-	ALLEGRO_EVENT_QUEUE * eventQueue;
-	ALLEGRO_FONT * coreFont;
+	ALLEGRO_DISPLAY * display = NULL;
+	ALLEGRO_EVENT_QUEUE * eventQueue = NULL;
+	ALLEGRO_FONT * coreFont = NULL;
 	
 	// Stops the loop when false
 	bool keepCoreRunning;
@@ -46,15 +47,18 @@ private:
 	void Draw();
 	
 	// Time management
-	ALLEGRO_TIMER * coreTimer; // Locks fps
+	ALLEGRO_TIMER * coreTimer = NULL; // Locks fps
     
     //ECS
-    ECS::World * world;
+    ECS::World * m_world = NULL;
     
-    RendererSystem * rendererSystem;
-    InputSystem * inputSystem;
+    ObjectRendererSystem * m_objctRenderer = NULL;
+    MapRendererSystem * m_mapRenderer = NULL;
+    PlayerInputSystem * m_playerInput = NULL;
     
-    ECS::Entity * player;
+    ECS::Entity * m_player = NULL;
+    
+    ECS::Entity * m_mainMap = NULL;
 	
 };
 

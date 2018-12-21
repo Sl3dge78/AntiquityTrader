@@ -43,8 +43,8 @@ Core::Core()
     
 	DebugLog("Init: Core Timer\n");
     
-    world = new ECS::World();
-    if (!world)
+    m_world = new ECS::World();
+    if (!m_world)
         throw runtime_error("Failed to initialize: World\n");
     
     DebugLog("Init: World\n");
@@ -63,7 +63,7 @@ Core::~Core()
 	    DebugLog("-- - Closing app-- - \n\n");
 
 	// Destroy all gameobjects
-    delete world; //World deletes all entities and systems
+    delete m_world; //World deletes all entities and systems
     
 	al_destroy_font(coreFont);
         DebugLog("Destroyed: Core Font\n");
@@ -114,26 +114,25 @@ void Core::Start()
 	coreFont = al_create_builtin_font();
     
     
+    m_objctRenderer = m_world->AddSystem<ObjectRendererSystem>();
+    m_mapRenderer = m_world->AddSystem<MapRendererSystem>();
     /*
-     *   ENTITIES
+     *   PLAYER
      */
-    player = world->AddEntity();
-    
-    player->AddComponent<FontRenderer>(coreFont, '@', al_map_rgb(150, 0, 0));
-    player->AddComponent<Transform>();
-    player->AddComponent<PlayerController>();
+    m_player = m_world->AddEntity();
+    m_player->AddComponent<FontRenderer>(coreFont, '@', al_map_rgb(150, 0, 0));
+    m_player->AddComponent<Transform>();
+    m_playerInput = m_world ->AddSystem<PlayerInputSystem>();
+    m_objctRenderer->AddEntity(m_player);
+    m_playerInput->AddEntity(m_player);
     
     /*
-     *   SYSTEMS
+     *  MAP
      */
-    
-    rendererSystem = world->AddSystem<RendererSystem>();
-    inputSystem = world ->AddSystem<InputSystem>();
-    
-    rendererSystem->AddEntity(player);
-    inputSystem->AddEntity(player);
-    inputSystem->ChangeCurrentFocus(player);
-    
+    m_mainMap = m_world->AddEntity();
+    m_mainMap->AddComponent<Map>(coreFont,100,100);
+    m_mainMap->AddComponent<Transform>(0,0);
+    m_mapRenderer->AddEntity(m_mainMap);
 }
 
 /// Update logic
@@ -158,7 +157,7 @@ void Core::Update()
             
         case ALLEGRO_EVENT_KEY_UP:
         case ALLEGRO_EVENT_KEY_DOWN:
-        inputSystem->Update(&ev);
+        m_playerInput->Update(&ev);
         break;
             
 	default:
@@ -176,7 +175,8 @@ void Core::Draw()
 {
 	al_clear_to_color(BACKGROUND_COLOR);
     
-    rendererSystem->Draw();
+    m_mapRenderer->Draw();
+    m_objctRenderer->Draw();
     
 	al_flip_display();
 }
