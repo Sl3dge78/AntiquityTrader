@@ -9,16 +9,17 @@
 #ifndef Map_hpp
 #define Map_hpp
 
-#include <stdio.h>
+#include <fstream>
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_font.h>
 
 #include "Macros.hpp"
+#include "DebugTools.hpp"
 
 #include "ECS/ECS.hpp"
 #include "Components.hpp"
 
-enum TileType { Water = 0, Land = 1, Town = 2 }; //DONT FORGET TO UPDATE THE TILE LIST BELOW
+enum TileType { Water = 0, Land = 1, Town = 2 , Coast = 3}; //DONT FORGET TO UPDATE THE TILE LIST BELOW
 
 struct Tile {
     ALLEGRO_COLOR color;
@@ -26,17 +27,15 @@ struct Tile {
 };
 
 
-
-
 class Map : public ECS::Component
 {
     public :
     Map(ALLEGRO_FONT * font, int width, int height);
+    Map(ALLEGRO_FONT * font, std::string fileName);
     ~Map();
     int width, height;
     TileType * map = NULL;
     ALLEGRO_FONT * font;
-    //tiles[Water] = Tile{al_map_rgb(100,100,255)}
     
 };
 

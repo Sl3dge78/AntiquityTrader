@@ -64,6 +64,7 @@
 		8A8BF05B21CC4941002FD5EA /* Components.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Components.cpp; sourceTree = "<group>"; };
 		8AF739C421CC62540035E2AD /* Map.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Map.cpp; sourceTree = "<group>"; };
 		8AF739C521CC62540035E2AD /* Map.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Map.hpp; sourceTree = "<group>"; };
+		8AF739C921CE91000035E2AD /* map.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = map.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +120,7 @@
 		8A815BA021C7372A008FB94F = {
 			isa = PBXGroup;
 			children = (
+				8AF739C721CE91000035E2AD /* resources */,
 				8A3B2AC321C73B4300F98D76 /* src */,
 				8A815BAA21C7372A008FB94F /* Products */,
 				8A815BB321C737CA008FB94F /* Frameworks */,
@@ -152,6 +154,22 @@
 				8A8BF05921CC305B002FD5EA /* PlayerInputSystem.hpp */,
 			);
 			path = Systems;
+			sourceTree = "<group>";
+		};
+		8AF739C721CE91000035E2AD /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				8AF739C821CE91000035E2AD /* map */,
+			);
+			path = resources;
+			sourceTree = "<group>";
+		};
+		8AF739C821CE91000035E2AD /* map */ = {
+			isa = PBXGroup;
+			children = (
+				8AF739C921CE91000035E2AD /* map.txt */,
+			);
+			path = map;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -130,7 +130,8 @@ void Core::Start()
      *  MAP
      */
     m_mainMap = m_world->AddEntity();
-    m_mainMap->AddComponent<Map>(coreFont,100,100);
+    //m_mainMap->AddComponent<Map>(coreFont,100,100);
+    m_mainMap->AddComponent<Map>(coreFont, "resources/map/map.txt");
     m_mainMap->AddComponent<Transform>(0,0);
     m_mapRenderer->AddEntity(m_mainMap);
 }
