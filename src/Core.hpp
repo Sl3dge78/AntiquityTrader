@@ -3,6 +3,7 @@
 #define Core_hpp
 
 #include <stdexcept>
+#include <sstream>
 #include <string>
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_font.h>
@@ -14,8 +15,10 @@
 #include "ECS/ECS.hpp"
 #include "Systems/RenderingSystems.hpp"
 #include "Systems/PlayerInputSystem.hpp"
-#include "Components.hpp"
-#include "Map.hpp"
+#include "Systems/Systems.hpp"
+
+#include "Components/Components.hpp"
+#include "Components/Map.hpp"
 
 
 ///Manages the engine. Initializes, updates and manages app events.
@@ -27,13 +30,12 @@ public:
 	~Core();
 	void GameLoop();
 	void CloseApplication();
-	static float deltaTime;
-	static float previousTime;
+	static float deltaTime, startUpdateTime, drawTime, endDrawTime;
 
 private:
-	ALLEGRO_DISPLAY * display = NULL;
-	ALLEGRO_EVENT_QUEUE * eventQueue = NULL;
-	ALLEGRO_FONT * coreFont = NULL;
+	ALLEGRO_DISPLAY * display = nullptr;
+	ALLEGRO_EVENT_QUEUE * eventQueue = nullptr;
+	ALLEGRO_FONT * coreFont = nullptr;
 	
 	// Stops the loop when false
 	bool keepCoreRunning;
@@ -47,18 +49,24 @@ private:
 	void Draw();
 	
 	// Time management
-	ALLEGRO_TIMER * coreTimer = NULL; // Locks fps
+	ALLEGRO_TIMER * coreTimer = nullptr; // Locks fps
     
     //ECS
-    ECS::World * m_world = NULL;
+    ECS::World * m_world = nullptr;
     
-    ObjectRendererSystem * m_objctRenderer = NULL;
-    MapRendererSystem * m_mapRenderer = NULL;
-    PlayerInputSystem * m_playerInput = NULL;
+    ObjectRendererSystem * m_objctRenderer = nullptr;
+    MapRendererSystem * m_mapRenderer = nullptr;
+    PlayerInputSystem * m_playerInput = nullptr;
+    CameraSystem * m_cameraSyst = nullptr;
     
-    ECS::Entity * m_player = NULL;
+    Rect m_cameraClipRect {0,0,0,0};
     
-    ECS::Entity * m_mainMap = NULL;
+    // DEBUG
+    void DrawDebug();
+    int debugFrames = 0;
+    std::stringstream debugFpstext;
+    std::stringstream debugUpdttext;
+    std::stringstream debugDrawtext;
 	
 };
 

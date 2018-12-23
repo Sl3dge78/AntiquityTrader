@@ -30,4 +30,3 @@ void DebugLog(char const * message)
     time += GetCurrentTimeString();
     std::cout << GetCurrentTimeString() << " - " << message;
 }
-

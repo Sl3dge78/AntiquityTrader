@@ -12,7 +12,7 @@
 #include "allegro5/allegro.h"
 
 #include "../ECS/ECS.hpp"
-#include "../Components.hpp"
+#include "../Components/Components.hpp"
 
 class PlayerInputSystem : public ECS::System
 {

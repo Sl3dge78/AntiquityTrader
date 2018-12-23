@@ -3,7 +3,9 @@
 using namespace std;
 
 float Core::deltaTime = 0;
-float Core::previousTime = 0;
+float Core::startUpdateTime = 0;
+float Core::drawTime = 0;
+float Core::endDrawTime = 0;
 
 ///When core is initialized, the app is ready to be started. Call GameLoop() to start it.
 Core::Core()
@@ -87,14 +89,20 @@ void Core::GameLoop()
 
 	while (keepCoreRunning)
 	{
-		// Register inputs
-
-		//TODO : Update delta time
+        Core::deltaTime = al_get_time() - Core::startUpdateTime;
+        Core::startUpdateTime = al_get_time();
+    
 		Update();
 		
 		if (redraw && al_is_event_queue_empty(eventQueue))
 		{
+            Core::drawTime = al_get_time();
 			Draw();
+            Core::endDrawTime = al_get_time();
+            
+            //DrawDebug();
+            
+            al_flip_display();
 		}
 
 	}
@@ -113,36 +121,41 @@ void Core::Start()
 
 	coreFont = al_create_builtin_font();
     
-    
     m_objctRenderer = m_world->AddSystem<ObjectRendererSystem>();
     m_mapRenderer = m_world->AddSystem<MapRendererSystem>();
-    /*
-     *   PLAYER
-     */
-    m_player = m_world->AddEntity();
-    m_player->AddComponent<FontRenderer>(coreFont, '@', al_map_rgb(150, 0, 0));
-    m_player->AddComponent<Transform>();
+    
+    //PLAYER
+    ECS::Entity * m_player = m_world->AddEntity();
+    m_player->AddComponent<Component_FontRenderer>(coreFont, '@', al_map_rgb(150, 0, 0));
+    m_player->AddComponent<Component_Transform>();
     m_playerInput = m_world ->AddSystem<PlayerInputSystem>();
     m_objctRenderer->AddEntity(m_player);
     m_playerInput->AddEntity(m_player);
     
-    /*
-     *  MAP
-     */
-    m_mainMap = m_world->AddEntity();
-    //m_mainMap->AddComponent<Map>(coreFont,100,100);
+    //MAP
+    ECS::Entity * m_mainMap = m_world->AddEntity();
     m_mainMap->AddComponent<Map>(coreFont, "resources/map/map.txt");
-    m_mainMap->AddComponent<Transform>(0,0);
+    m_mainMap->AddComponent<Component_Transform>(0,0);
     m_mapRenderer->AddEntity(m_mainMap);
+    
+    // CAMERA
+    ECS::Entity * m_mainCamera = m_world->AddEntity();
+    m_mainCamera->AddComponent<Component_Transform>();
+    Rect camBounds = Rect{.x = TILE_AMT_X/2,
+                          .y = TILE_AMT_Y/2,
+                          m_mainMap->GetComponent<Map>()->width - TILE_AMT_X/2,
+                          m_mainMap->GetComponent<Map>()->height - TILE_AMT_Y/2
+    };
+    
+    m_mainCamera->AddComponent<Component_Follow>(m_player, camBounds);
+    m_cameraSyst = m_world->AddSystem<CameraSystem>();
+    m_cameraSyst->AddEntity(m_mainCamera);
+    
 }
 
 /// Update logic
 void Core::Update()
 {
-	//Update delta time
-	Core::deltaTime = al_get_time() - Core::previousTime;
-	Core::previousTime = al_get_time();
-
 	//Read events
 	ALLEGRO_EVENT ev;
 	al_wait_for_event(eventQueue, &ev);
@@ -152,12 +165,14 @@ void Core::Update()
 	case ALLEGRO_EVENT_DISPLAY_CLOSE:
 		CloseApplication();
 		break;
+            
 	case ALLEGRO_EVENT_TIMER:
 		redraw = true;
 		break;
             
         case ALLEGRO_EVENT_KEY_UP:
         case ALLEGRO_EVENT_KEY_DOWN:
+        case ALLEGRO_EVENT_KEY_CHAR:
         m_playerInput->Update(&ev);
         break;
             
@@ -168,7 +183,7 @@ void Core::Update()
 	}
 
 	//Update logic
-
+    m_cameraSyst->Update(&m_cameraClipRect);
 }
 
 /// Draw all objects
@@ -176,10 +191,31 @@ void Core::Draw()
 {
 	al_clear_to_color(BACKGROUND_COLOR);
     
-    m_mapRenderer->Draw();
-    m_objctRenderer->Draw();
+    m_mapRenderer->Draw(m_cameraClipRect);
+    m_objctRenderer->Draw(m_cameraClipRect);
     
-	al_flip_display();
+}
+
+void Core::DrawDebug()
+{
+    debugFrames++;
+    
+    if(debugFrames >= 10)
+    {
+        debugFrames = 0;
+        
+        debugFpstext.str("");
+        debugUpdttext.str("");
+        debugDrawtext.str("");
+        
+        debugFpstext <<  "FPS :   " << 1/Core::deltaTime << "";
+        debugUpdttext << "Update: " << (Core::drawTime - Core::startUpdateTime)*1000 << "ms.";
+        debugDrawtext << "Draw:   " << (Core::endDrawTime - Core::drawTime)*1000 << "ms.";
+    }
+    
+    al_draw_text(coreFont, al_map_rgb(255, 255, 255), 0, 0, ALLEGRO_ALIGN_LEFT, debugFpstext.str().c_str());
+    al_draw_text(coreFont, al_map_rgb(255, 255, 255), 0, 8, ALLEGRO_ALIGN_LEFT, debugUpdttext.str().c_str());
+    al_draw_text(coreFont, al_map_rgb(255, 255, 255), 0, 16, ALLEGRO_ALIGN_LEFT, debugDrawtext.str().c_str());
 }
 
 /// Make the game stop

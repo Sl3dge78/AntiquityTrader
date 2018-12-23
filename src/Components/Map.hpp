@@ -16,7 +16,7 @@
 #include "Macros.hpp"
 #include "DebugTools.hpp"
 
-#include "ECS/ECS.hpp"
+#include "../ECS/ECS.hpp"
 #include "Components.hpp"
 
 enum TileType { Water = 0, Land = 1, Town = 2 , Coast = 3}; //DONT FORGET TO UPDATE THE TILE LIST BELOW
@@ -38,11 +38,4 @@ class Map : public ECS::Component
     ALLEGRO_FONT * font;
     
 };
-
-struct MapRendererSystem : public ECS::System
-{
-public:
-    void Draw();
-};
-
 #endif /* Map_hpp */

@@ -21,6 +21,8 @@
 		8A8BF05A21CC305B002FD5EA /* PlayerInputSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8BF05821CC305B002FD5EA /* PlayerInputSystem.cpp */; };
 		8A8BF05C21CC4941002FD5EA /* Components.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8BF05B21CC4941002FD5EA /* Components.cpp */; };
 		8AF739C621CC62540035E2AD /* Map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AF739C421CC62540035E2AD /* Map.cpp */; };
+		8AF739CC21CEE1910035E2AD /* Systems.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AF739CA21CEE1910035E2AD /* Systems.cpp */; };
+		8AF739CF21CFE0690035E2AD /* Rect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AF739CD21CFE0690035E2AD /* Rect.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -65,6 +67,10 @@
 		8AF739C421CC62540035E2AD /* Map.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Map.cpp; sourceTree = "<group>"; };
 		8AF739C521CC62540035E2AD /* Map.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Map.hpp; sourceTree = "<group>"; };
 		8AF739C921CE91000035E2AD /* map.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = map.txt; sourceTree = "<group>"; };
+		8AF739CA21CEE1910035E2AD /* Systems.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Systems.cpp; sourceTree = "<group>"; };
+		8AF739CB21CEE1910035E2AD /* Systems.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Systems.hpp; sourceTree = "<group>"; };
+		8AF739CD21CFE0690035E2AD /* Rect.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Rect.cpp; sourceTree = "<group>"; };
+		8AF739CE21CFE0690035E2AD /* Rect.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Rect.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,12 +90,9 @@
 		8A3B2AC321C73B4300F98D76 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				8A8BF05721CB132F002FD5EA /* Systems */,
-				8A8BF03F21C85394002FD5EA /* Components.hpp */,
-				8A8BF05B21CC4941002FD5EA /* Components.cpp */,
-				8AF739C421CC62540035E2AD /* Map.cpp */,
-				8AF739C521CC62540035E2AD /* Map.hpp */,
 				8A3B2ADB21C73B8800F98D76 /* ECS */,
+				8AF739D021CFE9060035E2AD /* Components */,
+				8A8BF05721CB132F002FD5EA /* Systems */,
 				8A3B2AD321C73B8100F98D76 /* Core.cpp */,
 				8A3B2AC721C73B7F00F98D76 /* Core.hpp */,
 				8A3B2ACB21C73B8000F98D76 /* Macros.hpp */,
@@ -97,6 +100,8 @@
 				8A3B2ADC21C73C2F00F98D76 /* main.hpp */,
 				8A8BF05421CAE7BD002FD5EA /* DebugTools.cpp */,
 				8A8BF05521CAE7BD002FD5EA /* DebugTools.hpp */,
+				8AF739CD21CFE0690035E2AD /* Rect.cpp */,
+				8AF739CE21CFE0690035E2AD /* Rect.hpp */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -152,6 +157,8 @@
 				8A8BF04921C855B9002FD5EA /* RenderingSystems.hpp */,
 				8A8BF05821CC305B002FD5EA /* PlayerInputSystem.cpp */,
 				8A8BF05921CC305B002FD5EA /* PlayerInputSystem.hpp */,
+				8AF739CA21CEE1910035E2AD /* Systems.cpp */,
+				8AF739CB21CEE1910035E2AD /* Systems.hpp */,
 			);
 			path = Systems;
 			sourceTree = "<group>";
@@ -170,6 +177,17 @@
 				8AF739C921CE91000035E2AD /* map.txt */,
 			);
 			path = map;
+			sourceTree = "<group>";
+		};
+		8AF739D021CFE9060035E2AD /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				8AF739C521CC62540035E2AD /* Map.hpp */,
+				8AF739C421CC62540035E2AD /* Map.cpp */,
+				8A8BF05B21CC4941002FD5EA /* Components.cpp */,
+				8A8BF03F21C85394002FD5EA /* Components.hpp */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -234,8 +252,10 @@
 				8A8BF05C21CC4941002FD5EA /* Components.cpp in Sources */,
 				8A8BF04A21C855B9002FD5EA /* RenderingSystems.cpp in Sources */,
 				8AF739C621CC62540035E2AD /* Map.cpp in Sources */,
+				8AF739CF21CFE0690035E2AD /* Rect.cpp in Sources */,
 				8A8BF04321C85409002FD5EA /* Entity.cpp in Sources */,
 				8A815BAD21C7372A008FB94F /* main.cpp in Sources */,
+				8AF739CC21CEE1910035E2AD /* Systems.cpp in Sources */,
 				8A8BF03A21C8518F002FD5EA /* Component.cpp in Sources */,
 				8A3B2ADA21C73B8100F98D76 /* Core.cpp in Sources */,
 				8A8BF05621CAE7BD002FD5EA /* DebugTools.cpp in Sources */,
