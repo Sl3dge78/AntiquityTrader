@@ -28,7 +28,7 @@ void ObjectRendererSystem::Draw(const Rect clipRect) {
 }
 
 Tile TILES_LIST[4] = {
-    TILES_LIST[Water] = (Tile){.color = (ALLEGRO_COLOR){.r = 0.33, .g = 0.33, .b = 1, .a = 1}, .character = '~'},
+    TILES_LIST[Water] = (Tile){.color = (ALLEGRO_COLOR){.r = 0.33, .g = 0.50, .b = 1, .a = 1}, .character = '~'},
     TILES_LIST[Land] = (Tile){.color = (ALLEGRO_COLOR){.r = 0,04, .g = 0.64, .b = 0, .a = 1}, .character = 'M'},
     TILES_LIST[Town] = (Tile){.color = (ALLEGRO_COLOR){.r = 1, .g = 1, .b = 1, .a = 1}, .character = 'W'},
     TILES_LIST[Coast] = (Tile){.color = (ALLEGRO_COLOR){.r = 1, .g = 1, .b = 0, .a = 1}, .character = 'w'},

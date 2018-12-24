@@ -50,6 +50,7 @@ namespace ECS
     T * Entity::AddComponent(Args&&...args){
         T * comp = new T{std::forward<Args>(args)...};
         components.push_back(comp);
+        comp->entity = this;
         return comp;
     }
     

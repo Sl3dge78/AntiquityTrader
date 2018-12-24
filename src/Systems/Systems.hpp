@@ -20,6 +20,7 @@ class CameraSystem : public ECS::System
 public:
     CameraSystem() = default;
     ~CameraSystem() = default;
+    /// Changes cliprect to be equals to the rect that the camera sees.
     void Update(Rect * clipRect);
     
 private:

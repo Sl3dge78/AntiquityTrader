@@ -7,6 +7,7 @@
 #include <string>
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_font.h>
+#include <allegro5/allegro_primitives.h>
 
 #include "DebugTools.hpp"
 #include "Macros.hpp"
@@ -19,6 +20,7 @@
 
 #include "Components/Components.hpp"
 #include "Components/Map.hpp"
+#include "Components/UI.hpp"
 
 
 ///Manages the engine. Initializes, updates and manages app events.
@@ -58,6 +60,7 @@ private:
     MapRendererSystem * m_mapRenderer = nullptr;
     PlayerInputSystem * m_playerInput = nullptr;
     CameraSystem * m_cameraSyst = nullptr;
+    UIRenderer * m_uiRendererSyst = nullptr;
     
     Rect m_cameraClipRect {0,0,0,0};
     

@@ -8,11 +8,21 @@
 
 #ifndef Component_hpp
 #define Component_hpp
+
 namespace ECS
 {
+    class Entity;
+    
     class Component {
         public :
+            Component() = default;
             virtual ~Component() = 0;
+            Entity * GetEntity(){return this->entity;}
+        
+        protected :
+        Entity * entity;
+        
+        friend class Entity;
         
     };
     

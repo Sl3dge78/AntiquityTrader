@@ -27,7 +27,12 @@ Core::Core()
 		throw runtime_error("Failed to initialize: Font\n");
 
     DebugLog("Init: Font add-on initialized\n");
-
+    
+    if(!al_init_primitives_addon())
+        throw runtime_error("Failed to initialize: Primitives\n");
+    
+    DebugLog("Init: primitives initialized\n");
+    
 	eventQueue = al_create_event_queue();
 	if (!eventQueue)
 		throw runtime_error("Failed to initialize: Event System\n");
@@ -70,9 +75,12 @@ Core::~Core()
 	al_destroy_font(coreFont);
         DebugLog("Destroyed: Core Font\n");
     
+    al_shutdown_primitives_addon();
+        DebugLog("Destroyed: Primitives\n");
+    
 	al_uninstall_keyboard();
 	    DebugLog("Destroyed: Keyboard\n");
-
+    
 	al_destroy_event_queue(eventQueue);
 	    DebugLog("Destroyed: Event Queue\n");
 
@@ -126,8 +134,8 @@ void Core::Start()
     
     //PLAYER
     ECS::Entity * m_player = m_world->AddEntity();
-    m_player->AddComponent<Component_FontRenderer>(coreFont, '@', al_map_rgb(150, 0, 0));
-    m_player->AddComponent<Component_Transform>();
+    m_player->AddComponent<Component_FontRenderer>(coreFont, '@', al_map_rgb(255, 255, 255));
+    m_player->AddComponent<Component_Transform>(50,50);
     m_playerInput = m_world ->AddSystem<PlayerInputSystem>();
     m_objctRenderer->AddEntity(m_player);
     m_playerInput->AddEntity(m_player);
@@ -150,6 +158,14 @@ void Core::Start()
     m_mainCamera->AddComponent<Component_Follow>(m_player, camBounds);
     m_cameraSyst = m_world->AddSystem<CameraSystem>();
     m_cameraSyst->AddEntity(m_mainCamera);
+    
+    //TESTUIPANEL
+    ECS::Entity * UIPanelTest = m_world->AddEntity();
+    UIPanel * panel = UIPanelTest->AddComponent<UIPanel>();
+    panel->color = al_map_rgba(0,0,0,200);
+    panel->rect = (Rect){.x = WINDOW_WIDTH - 200, .y = 0, .height = WINDOW_HEIGHT, .width = 200};
+    m_uiRendererSyst = m_world->AddSystem<UIRenderer>();
+    m_uiRendererSyst->AddEntity(UIPanelTest);
     
 }
 
@@ -193,6 +209,8 @@ void Core::Draw()
     
     m_mapRenderer->Draw(m_cameraClipRect);
     m_objctRenderer->Draw(m_cameraClipRect);
+    
+    m_uiRendererSyst->Draw();
     
 }
 

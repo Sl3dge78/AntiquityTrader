@@ -33,17 +33,26 @@ public:
 
 class Component_Transform : public ECS::Component {
 public:
-    Component_Transform(int posX = 10, int posY = 10) :
+    Component_Transform(int posX = 0, int posY = 0) :
     posX(posX),
     posY(posY)
     {
-        
+        parent = nullptr;
     };
     ~Component_Transform() = default;
     
     int posX;
     int posY;
     
+    void SetParent(ECS::Entity * parent);
+    std::vector<ECS::Entity *> GetChildren();
+    void AddChildren(ECS::Entity * child);
+    void RemoveChildren(ECS::Entity * child);
+    void RemoveAllChildren();
+    
+protected:
+    ECS::Entity * parent;
+    std::vector<ECS::Entity *> childs;
 };
 
 class Component_Follow : public ECS::Component

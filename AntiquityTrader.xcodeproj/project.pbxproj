@@ -20,9 +20,11 @@
 		8A8BF05621CAE7BD002FD5EA /* DebugTools.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8BF05421CAE7BD002FD5EA /* DebugTools.cpp */; };
 		8A8BF05A21CC305B002FD5EA /* PlayerInputSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8BF05821CC305B002FD5EA /* PlayerInputSystem.cpp */; };
 		8A8BF05C21CC4941002FD5EA /* Components.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8BF05B21CC4941002FD5EA /* Components.cpp */; };
+		8AF6F64921D150740040D79A /* liballegro_primitives.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AF6F64821D150740040D79A /* liballegro_primitives.dylib */; };
 		8AF739C621CC62540035E2AD /* Map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AF739C421CC62540035E2AD /* Map.cpp */; };
 		8AF739CC21CEE1910035E2AD /* Systems.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AF739CA21CEE1910035E2AD /* Systems.cpp */; };
 		8AF739CF21CFE0690035E2AD /* Rect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AF739CD21CFE0690035E2AD /* Rect.cpp */; };
+		8AF739D321D13A110035E2AD /* UI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AF739D121D13A110035E2AD /* UI.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -64,6 +66,7 @@
 		8A8BF05821CC305B002FD5EA /* PlayerInputSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerInputSystem.cpp; sourceTree = "<group>"; };
 		8A8BF05921CC305B002FD5EA /* PlayerInputSystem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PlayerInputSystem.hpp; sourceTree = "<group>"; };
 		8A8BF05B21CC4941002FD5EA /* Components.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Components.cpp; sourceTree = "<group>"; };
+		8AF6F64821D150740040D79A /* liballegro_primitives.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = liballegro_primitives.dylib; path = ../../../../../../usr/local/lib/liballegro_primitives.dylib; sourceTree = "<group>"; };
 		8AF739C421CC62540035E2AD /* Map.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Map.cpp; sourceTree = "<group>"; };
 		8AF739C521CC62540035E2AD /* Map.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Map.hpp; sourceTree = "<group>"; };
 		8AF739C921CE91000035E2AD /* map.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = map.txt; sourceTree = "<group>"; };
@@ -71,6 +74,8 @@
 		8AF739CB21CEE1910035E2AD /* Systems.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Systems.hpp; sourceTree = "<group>"; };
 		8AF739CD21CFE0690035E2AD /* Rect.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Rect.cpp; sourceTree = "<group>"; };
 		8AF739CE21CFE0690035E2AD /* Rect.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Rect.hpp; sourceTree = "<group>"; };
+		8AF739D121D13A110035E2AD /* UI.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UI.cpp; sourceTree = "<group>"; };
+		8AF739D221D13A110035E2AD /* UI.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UI.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8AF6F64921D150740040D79A /* liballegro_primitives.dylib in Frameworks */,
 				8A3B2AFA21C8331C00F98D76 /* liballegro.dylib in Frameworks */,
 				8A8BF03621C8343A002FD5EA /* liballegro_main.dylib in Frameworks */,
 				8A8BF03421C8336D002FD5EA /* liballegro_font.dylib in Frameworks */,
@@ -143,6 +149,7 @@
 		8A815BB321C737CA008FB94F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8AF6F64821D150740040D79A /* liballegro_primitives.dylib */,
 				8A8BF03521C8343A002FD5EA /* liballegro_main.dylib */,
 				8A8BF03321C8336D002FD5EA /* liballegro_font.dylib */,
 				8A3B2AF921C8331C00F98D76 /* liballegro.dylib */,
@@ -186,6 +193,8 @@
 				8AF739C421CC62540035E2AD /* Map.cpp */,
 				8A8BF05B21CC4941002FD5EA /* Components.cpp */,
 				8A8BF03F21C85394002FD5EA /* Components.hpp */,
+				8AF739D121D13A110035E2AD /* UI.cpp */,
+				8AF739D221D13A110035E2AD /* UI.hpp */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -259,6 +268,7 @@
 				8A8BF03A21C8518F002FD5EA /* Component.cpp in Sources */,
 				8A3B2ADA21C73B8100F98D76 /* Core.cpp in Sources */,
 				8A8BF05621CAE7BD002FD5EA /* DebugTools.cpp in Sources */,
+				8AF739D321D13A110035E2AD /* UI.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
