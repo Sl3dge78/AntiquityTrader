@@ -130,29 +130,31 @@ void Core::Start()
 	coreFont = al_create_builtin_font();
     
     m_objctRenderer = m_world->AddSystem<ObjectRendererSystem>();
-    m_mapRenderer = m_world->AddSystem<MapRendererSystem>();
     
     //PLAYER
     ECS::Entity * m_player = m_world->AddEntity();
     m_player->AddComponent<Component_FontRenderer>(coreFont, '@', al_map_rgb(255, 255, 255));
-    m_player->AddComponent<Component_Transform>(50,50);
-    m_playerInput = m_world ->AddSystem<PlayerInputSystem>();
+    m_player->AddComponent<Component_Transform>(225,45);
+    m_player->AddComponent<Component_Collider>();
+    m_playerSyst = m_world->AddSystem<PlayerSystem>(m_player);
     m_objctRenderer->AddEntity(m_player);
-    m_playerInput->AddEntity(m_player);
     
     //MAP
-    ECS::Entity * m_mainMap = m_world->AddEntity();
-    m_mainMap->AddComponent<Map>(coreFont, "resources/map/map.txt");
-    m_mainMap->AddComponent<Component_Transform>(0,0);
-    m_mapRenderer->AddEntity(m_mainMap);
+    //ECS::Entity * m_mainMap = m_world->AddEntity();
+    //m_mainMap->AddComponent<Component_Map>();
+    //m_mainMap->AddComponent<Component_Transform>(0,0);
+    //m_mapRenderer->AddEntity(m_mainMap);
+    m_mapSystem = m_world->AddSystem<MapSystem>(coreFont,"resources/map/map.txt","resources/map/towns.txt",m_world);
+    mapColl = m_world->AddSystem<MapCollisionSystem>(m_mapSystem->mapEntity);
+    mapColl->AddEntity(m_player);
     
     // CAMERA
     ECS::Entity * m_mainCamera = m_world->AddEntity();
     m_mainCamera->AddComponent<Component_Transform>();
     Rect camBounds = Rect{.x = TILE_AMT_X/2,
                           .y = TILE_AMT_Y/2,
-                          m_mainMap->GetComponent<Map>()->width - TILE_AMT_X/2,
-                          m_mainMap->GetComponent<Map>()->height - TILE_AMT_Y/2
+                          m_mapSystem->mapEntity->GetComponent<Component_Map>()->width - TILE_AMT_X/2,
+                          m_mapSystem->mapEntity->GetComponent<Component_Map>()->height - TILE_AMT_Y/2
     };
     
     m_mainCamera->AddComponent<Component_Follow>(m_player, camBounds);
@@ -160,12 +162,18 @@ void Core::Start()
     m_cameraSyst->AddEntity(m_mainCamera);
     
     //TESTUIPANEL
-    ECS::Entity * UIPanelTest = m_world->AddEntity();
-    UIPanel * panel = UIPanelTest->AddComponent<UIPanel>();
+    /*
+    ECS::Entity * TownUI = m_world->AddEntity();
+    TownUI->isActive = false;
+    UIPanel * panel = TownUI->AddComponent<UIPanel>();
     panel->color = al_map_rgba(0,0,0,200);
     panel->rect = (Rect){.x = WINDOW_WIDTH - 200, .y = 0, .height = WINDOW_HEIGHT, .width = 200};
-    m_uiRendererSyst = m_world->AddSystem<UIRenderer>();
-    m_uiRendererSyst->AddEntity(UIPanelTest);
+    UIText * txt = TownUI->AddComponent<UIText>();
+    txt->text = "TEST\nTEST\n   TEST";
+    txt->rect = (Rect){.x = WINDOW_WIDTH - 200, .y = 0, .height = WINDOW_HEIGHT, .width = 200};
+    m_uiRendererSyst = m_world->AddSystem<UISystem>(coreFont);
+    m_uiRendererSyst->AddEntity(TownUI);
+     */
     
 }
 
@@ -189,7 +197,7 @@ void Core::Update()
         case ALLEGRO_EVENT_KEY_UP:
         case ALLEGRO_EVENT_KEY_DOWN:
         case ALLEGRO_EVENT_KEY_CHAR:
-        m_playerInput->Update(&ev);
+        m_playerSyst->Update(&ev);
         break;
             
 	default:
@@ -200,6 +208,7 @@ void Core::Update()
 
 	//Update logic
     m_cameraSyst->Update(&m_cameraClipRect);
+    mapColl->Update();
 }
 
 /// Draw all objects
@@ -207,10 +216,10 @@ void Core::Draw()
 {
 	al_clear_to_color(BACKGROUND_COLOR);
     
-    m_mapRenderer->Draw(m_cameraClipRect);
+    m_mapSystem->Draw(m_cameraClipRect);
     m_objctRenderer->Draw(m_cameraClipRect);
     
-    m_uiRendererSyst->Draw();
+    //m_uiRendererSyst->Draw();
     
 }
 

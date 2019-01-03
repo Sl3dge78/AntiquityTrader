@@ -8,6 +8,12 @@
 
 #include "Components.hpp"
 
+Component_FontRenderer::Component_FontRenderer(ALLEGRO_FONT * font, char text, ALLEGRO_COLOR color)
+:font(font), color(color)
+{
+    this->text[0] = text;
+}
+
 void Component_Transform::SetParent(ECS::Entity *parent)
 {
     this->parent = parent;
@@ -54,4 +60,23 @@ void Component_Transform::RemoveAllChildren()
         childs.erase(it);
         ++it;
     }
+}
+
+int Component_Transform::GetPositionID() { 
+    return (posX + (posY * 500));
+}
+
+
+//====================================================
+
+Component_Town::Component_Town(int position) {
+    this->position = position;
+    this->name = "TEST";
+    this->uiString = name;
+}
+
+Component_Town::Component_Town(int position, std::string name) {
+    this->position = position;
+    this->name = name;
+    this->uiString = name;
 }

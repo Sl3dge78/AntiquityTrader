@@ -10,25 +10,27 @@
 #define UI_hpp
 
 #include <allegro5/allegro.h>
-#include <allegro5/allegro_font.h>
-#include <allegro5/allegro_primitives.h>
 
 #include "../ECS/ECS.hpp"
 #include "../Rect.hpp"
 
-struct UIPanel : public ECS::Component
+struct UIElement : public ECS::Component
 {
-    //Screenspace rect where to draw the panel;
     Rect rect;
-    ALLEGRO_COLOR color;
+    ALLEGRO_COLOR color = (ALLEGRO_COLOR){.r = 1, .g = 1, .b = 1, .a = 1};
+    
+    friend struct UIRenderer;
+    
+};
+
+struct UIPanel : public UIElement {};
+
+struct UIText : public UIElement
+{
+    std::string text;
     
     friend struct UIRenderer;
 };
 
-struct UIRenderer : public ECS::System
-{
-public:
-    void Draw();
-};
 
 #endif /* UI_hpp */

@@ -6,11 +6,12 @@
 //  Copyright © 2018 Sledge. All rights reserved.
 //
 
-#include "Map.hpp"
+#include "Component_Map.hpp"
 
 using namespace std;
 
-Map::Map(ALLEGRO_FONT * font, int width, int height)
+/*
+MapComponent::MapComponent(ALLEGRO_FONT * font, int width, int height)
 {
     this->width = width;
     this->height = height;
@@ -23,7 +24,7 @@ Map::Map(ALLEGRO_FONT * font, int width, int height)
 }
 
 
-Map::Map(ALLEGRO_FONT * font, string fileName): font(font)
+MapComponent::MapComponent(ALLEGRO_FONT * font, string fileName): font(font)
 {
     //Open the file
     fstream file;
@@ -52,6 +53,11 @@ Map::Map(ALLEGRO_FONT * font, string fileName): font(font)
                 map[currentPos] = TileType::Water;
             else if(ch=='M')
                 map[currentPos] = TileType::Land;
+            else if (ch =='T')
+            {
+                map[currentPos] = TileType::Town;
+                townSystem->AddTownAtPosition(currentPos);
+            }
             else
                 map[currentPos] = TileType::Coast;
             
@@ -61,11 +67,9 @@ Map::Map(ALLEGRO_FONT * font, string fileName): font(font)
     
     file.close();
 }
+*/
+//Component_Map::Component_Map(){}
 
-Map::~Map()
-{
-    delete [] map;
-}
 
 
 

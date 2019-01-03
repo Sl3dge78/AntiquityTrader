@@ -18,10 +18,13 @@
 		8A8BF04A21C855B9002FD5EA /* RenderingSystems.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8BF04821C855B9002FD5EA /* RenderingSystems.cpp */; };
 		8A8BF04D21C85A24002FD5EA /* World.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8BF04B21C85A24002FD5EA /* World.cpp */; };
 		8A8BF05621CAE7BD002FD5EA /* DebugTools.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8BF05421CAE7BD002FD5EA /* DebugTools.cpp */; };
-		8A8BF05A21CC305B002FD5EA /* PlayerInputSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8BF05821CC305B002FD5EA /* PlayerInputSystem.cpp */; };
+		8A8BF05A21CC305B002FD5EA /* PlayerSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8BF05821CC305B002FD5EA /* PlayerSystem.cpp */; };
 		8A8BF05C21CC4941002FD5EA /* Components.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8BF05B21CC4941002FD5EA /* Components.cpp */; };
 		8AF6F64921D150740040D79A /* liballegro_primitives.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AF6F64821D150740040D79A /* liballegro_primitives.dylib */; };
-		8AF739C621CC62540035E2AD /* Map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AF739C421CC62540035E2AD /* Map.cpp */; };
+		8AF6F65221D659F90040D79A /* MapCollisionSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AF6F65021D659F90040D79A /* MapCollisionSystem.cpp */; };
+		8AF6F65521D660000040D79A /* UISystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AF6F65321D660000040D79A /* UISystem.cpp */; };
+		8AF6F65821D7C8CC0040D79A /* MapSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AF6F65621D7C8CC0040D79A /* MapSystem.cpp */; };
+		8AF739C621CC62540035E2AD /* Component_Map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AF739C421CC62540035E2AD /* Component_Map.cpp */; };
 		8AF739CC21CEE1910035E2AD /* Systems.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AF739CA21CEE1910035E2AD /* Systems.cpp */; };
 		8AF739CF21CFE0690035E2AD /* Rect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AF739CD21CFE0690035E2AD /* Rect.cpp */; };
 		8AF739D321D13A110035E2AD /* UI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AF739D121D13A110035E2AD /* UI.cpp */; };
@@ -63,12 +66,19 @@
 		8A8BF04E21C8710C002FD5EA /* ECS.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ECS.hpp; sourceTree = "<group>"; };
 		8A8BF05421CAE7BD002FD5EA /* DebugTools.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DebugTools.cpp; sourceTree = "<group>"; };
 		8A8BF05521CAE7BD002FD5EA /* DebugTools.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DebugTools.hpp; sourceTree = "<group>"; };
-		8A8BF05821CC305B002FD5EA /* PlayerInputSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerInputSystem.cpp; sourceTree = "<group>"; };
-		8A8BF05921CC305B002FD5EA /* PlayerInputSystem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PlayerInputSystem.hpp; sourceTree = "<group>"; };
+		8A8BF05821CC305B002FD5EA /* PlayerSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerSystem.cpp; sourceTree = "<group>"; };
+		8A8BF05921CC305B002FD5EA /* PlayerSystem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PlayerSystem.hpp; sourceTree = "<group>"; };
 		8A8BF05B21CC4941002FD5EA /* Components.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Components.cpp; sourceTree = "<group>"; };
 		8AF6F64821D150740040D79A /* liballegro_primitives.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = liballegro_primitives.dylib; path = ../../../../../../usr/local/lib/liballegro_primitives.dylib; sourceTree = "<group>"; };
-		8AF739C421CC62540035E2AD /* Map.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Map.cpp; sourceTree = "<group>"; };
-		8AF739C521CC62540035E2AD /* Map.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Map.hpp; sourceTree = "<group>"; };
+		8AF6F65021D659F90040D79A /* MapCollisionSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MapCollisionSystem.cpp; sourceTree = "<group>"; };
+		8AF6F65121D659F90040D79A /* MapCollisionSystem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MapCollisionSystem.hpp; sourceTree = "<group>"; };
+		8AF6F65321D660000040D79A /* UISystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UISystem.cpp; sourceTree = "<group>"; };
+		8AF6F65421D660000040D79A /* UISystem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UISystem.hpp; sourceTree = "<group>"; };
+		8AF6F65621D7C8CC0040D79A /* MapSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MapSystem.cpp; sourceTree = "<group>"; };
+		8AF6F65721D7C8CC0040D79A /* MapSystem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MapSystem.hpp; sourceTree = "<group>"; };
+		8AF6F65921DE950B0040D79A /* towns.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = towns.txt; sourceTree = "<group>"; };
+		8AF739C421CC62540035E2AD /* Component_Map.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Component_Map.cpp; sourceTree = "<group>"; };
+		8AF739C521CC62540035E2AD /* Component_Map.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Component_Map.hpp; sourceTree = "<group>"; };
 		8AF739C921CE91000035E2AD /* map.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = map.txt; sourceTree = "<group>"; };
 		8AF739CA21CEE1910035E2AD /* Systems.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Systems.cpp; sourceTree = "<group>"; };
 		8AF739CB21CEE1910035E2AD /* Systems.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Systems.hpp; sourceTree = "<group>"; };
@@ -162,10 +172,16 @@
 			children = (
 				8A8BF04821C855B9002FD5EA /* RenderingSystems.cpp */,
 				8A8BF04921C855B9002FD5EA /* RenderingSystems.hpp */,
-				8A8BF05821CC305B002FD5EA /* PlayerInputSystem.cpp */,
-				8A8BF05921CC305B002FD5EA /* PlayerInputSystem.hpp */,
+				8A8BF05821CC305B002FD5EA /* PlayerSystem.cpp */,
+				8A8BF05921CC305B002FD5EA /* PlayerSystem.hpp */,
 				8AF739CA21CEE1910035E2AD /* Systems.cpp */,
 				8AF739CB21CEE1910035E2AD /* Systems.hpp */,
+				8AF6F65021D659F90040D79A /* MapCollisionSystem.cpp */,
+				8AF6F65121D659F90040D79A /* MapCollisionSystem.hpp */,
+				8AF6F65321D660000040D79A /* UISystem.cpp */,
+				8AF6F65421D660000040D79A /* UISystem.hpp */,
+				8AF6F65621D7C8CC0040D79A /* MapSystem.cpp */,
+				8AF6F65721D7C8CC0040D79A /* MapSystem.hpp */,
 			);
 			path = Systems;
 			sourceTree = "<group>";
@@ -182,6 +198,7 @@
 			isa = PBXGroup;
 			children = (
 				8AF739C921CE91000035E2AD /* map.txt */,
+				8AF6F65921DE950B0040D79A /* towns.txt */,
 			);
 			path = map;
 			sourceTree = "<group>";
@@ -189,8 +206,8 @@
 		8AF739D021CFE9060035E2AD /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				8AF739C521CC62540035E2AD /* Map.hpp */,
-				8AF739C421CC62540035E2AD /* Map.cpp */,
+				8AF739C521CC62540035E2AD /* Component_Map.hpp */,
+				8AF739C421CC62540035E2AD /* Component_Map.cpp */,
 				8A8BF05B21CC4941002FD5EA /* Components.cpp */,
 				8A8BF03F21C85394002FD5EA /* Components.hpp */,
 				8AF739D121D13A110035E2AD /* UI.cpp */,
@@ -256,14 +273,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A8BF04621C854D0002FD5EA /* System.cpp in Sources */,
-				8A8BF05A21CC305B002FD5EA /* PlayerInputSystem.cpp in Sources */,
+				8A8BF05A21CC305B002FD5EA /* PlayerSystem.cpp in Sources */,
 				8A8BF04D21C85A24002FD5EA /* World.cpp in Sources */,
 				8A8BF05C21CC4941002FD5EA /* Components.cpp in Sources */,
 				8A8BF04A21C855B9002FD5EA /* RenderingSystems.cpp in Sources */,
-				8AF739C621CC62540035E2AD /* Map.cpp in Sources */,
+				8AF739C621CC62540035E2AD /* Component_Map.cpp in Sources */,
+				8AF6F65221D659F90040D79A /* MapCollisionSystem.cpp in Sources */,
+				8AF6F65521D660000040D79A /* UISystem.cpp in Sources */,
 				8AF739CF21CFE0690035E2AD /* Rect.cpp in Sources */,
 				8A8BF04321C85409002FD5EA /* Entity.cpp in Sources */,
 				8A815BAD21C7372A008FB94F /* main.cpp in Sources */,
+				8AF6F65821D7C8CC0040D79A /* MapSystem.cpp in Sources */,
 				8AF739CC21CEE1910035E2AD /* Systems.cpp in Sources */,
 				8A8BF03A21C8518F002FD5EA /* Component.cpp in Sources */,
 				8A3B2ADA21C73B8100F98D76 /* Core.cpp in Sources */,

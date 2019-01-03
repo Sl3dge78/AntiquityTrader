@@ -7,3 +7,7 @@
 //
 
 #include "Component.hpp"
+
+namespace ECS {
+    int ComponentID::count = 0;
+}

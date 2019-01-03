@@ -15,11 +15,12 @@
 
 #include "ECS/ECS.hpp"
 #include "Systems/RenderingSystems.hpp"
-#include "Systems/PlayerInputSystem.hpp"
+#include "Systems/PlayerSystem.hpp"
+#include "Systems/MapSystem.hpp"
 #include "Systems/Systems.hpp"
 
 #include "Components/Components.hpp"
-#include "Components/Map.hpp"
+#include "Components/Component_Map.hpp"
 #include "Components/UI.hpp"
 
 
@@ -57,10 +58,11 @@ private:
     ECS::World * m_world = nullptr;
     
     ObjectRendererSystem * m_objctRenderer = nullptr;
-    MapRendererSystem * m_mapRenderer = nullptr;
-    PlayerInputSystem * m_playerInput = nullptr;
+    MapSystem * m_mapSystem = nullptr;
+    PlayerSystem * m_playerSyst = nullptr;
     CameraSystem * m_cameraSyst = nullptr;
-    UIRenderer * m_uiRendererSyst = nullptr;
+    UISystem * m_uiRendererSyst = nullptr;
+    MapCollisionSystem * mapColl = nullptr;
     
     Rect m_cameraClipRect {0,0,0,0};
     

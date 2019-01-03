@@ -11,7 +11,7 @@
 namespace ECS
 {
 
-    Entity::Entity(World *world, int id) { 
+    Entity::Entity(World *world, int id) {
         this->world = world;
         this->ID = id;
     }
@@ -21,11 +21,33 @@ namespace ECS
     }
 
     void Entity::RemoveAllComponents(){
-
-		for (std::vector<Component *>::iterator it = components.begin() ; it != components.end(); )
+        components.clear();
+    }
+    
+    Component * Entity::AddComponent(int id, Component * comp)
+    {
+        components[id] = comp;
+        return comp;
+    }
+    
+    bool Entity::HasComponent(int id) {
+        return (components.find(id) != components.end()) ;
+    }
+    
+    Component * Entity::GetComponent(int id) {
+        if (HasComponent(id))
         {
-                delete *it;
-                it = components.erase(it);
+            return components.at(id);
+        }
+        else
+            return nullptr;
+    }
+    
+    void Entity::RemoveComponent(int id)
+    {
+        if(HasComponent(id))
+        {
+            components.erase(id);
         }
     }
 }

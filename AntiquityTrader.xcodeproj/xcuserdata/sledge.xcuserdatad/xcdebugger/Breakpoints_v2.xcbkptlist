@@ -10,12 +10,214 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/Systems/Systems.cpp"
-            timestampString = "567359921.736709"
+            timestampString = "568242250.952351"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "41"
             endingLineNumber = "41"
             landmarkName = "CameraSystem::Update(Rect * clipRect)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/ECS/Entity.cpp"
+            timestampString = "568248233.756501"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "Entity::GetComponent(int id)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/Core.cpp"
+            timestampString = "568248233.75737"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "153"
+            endingLineNumber = "153"
+            landmarkName = "Core::Start()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/Core.cpp"
+            timestampString = "568248233.759058"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "154"
+            endingLineNumber = "154"
+            landmarkName = "Core::Start()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/ECS/Entity.hpp"
+            timestampString = "568248233.760258"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
+            landmarkName = "Entity::GetComponent()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Component_Transform* ECS::Entity::GetComponent&lt;Component_Transform&gt;()"
+                  moduleName = "AntiquityTrader"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sledge/Documents/00_Prod/Dev/AntiquityTrader/src/Systems/../ECS/Entity.hpp"
+                  timestampString = "568248063.697361"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "66"
+                  endingLineNumber = "66"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Component_Collider* ECS::Entity::GetComponent&lt;Component_Collider&gt;()"
+                  moduleName = "AntiquityTrader"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sledge/Documents/00_Prod/Dev/AntiquityTrader/src/Systems/../ECS/Entity.hpp"
+                  timestampString = "568248063.699608"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "66"
+                  endingLineNumber = "66"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Component_FontRenderer* ECS::Entity::GetComponent&lt;Component_FontRenderer&gt;()"
+                  moduleName = "AntiquityTrader"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sledge/Documents/00_Prod/Dev/AntiquityTrader/src/Systems/../ECS/Entity.hpp"
+                  timestampString = "568248063.702135"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "66"
+                  endingLineNumber = "66"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Component_Map* ECS::Entity::GetComponent&lt;Component_Map&gt;()"
+                  moduleName = "AntiquityTrader"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sledge/Documents/00_Prod/Dev/AntiquityTrader/src/Systems/../ECS/Entity.hpp"
+                  timestampString = "568248063.704479"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "66"
+                  endingLineNumber = "66"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "UIPanel* ECS::Entity::GetComponent&lt;UIPanel&gt;()"
+                  moduleName = "AntiquityTrader"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sledge/Documents/00_Prod/Dev/AntiquityTrader/src/Systems/../ECS/Entity.hpp"
+                  timestampString = "568248063.7070121"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "66"
+                  endingLineNumber = "66"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "UIText* ECS::Entity::GetComponent&lt;UIText&gt;()"
+                  moduleName = "AntiquityTrader"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sledge/Documents/00_Prod/Dev/AntiquityTrader/src/Systems/../ECS/Entity.hpp"
+                  timestampString = "568248063.709583"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "66"
+                  endingLineNumber = "66"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Component_Town* ECS::Entity::GetComponent&lt;Component_Town&gt;()"
+                  moduleName = "AntiquityTrader"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sledge/Documents/00_Prod/Dev/AntiquityTrader/src/Systems/../ECS/Entity.hpp"
+                  timestampString = "568248063.7125731"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "66"
+                  endingLineNumber = "66"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Component_Follow* ECS::Entity::GetComponent&lt;Component_Follow&gt;()"
+                  moduleName = "AntiquityTrader"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sledge/Documents/00_Prod/Dev/AntiquityTrader/src/Systems/../ECS/Entity.hpp"
+                  timestampString = "568248063.7169369"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "66"
+                  endingLineNumber = "66"
+                  offsetFromSymbolStart = "16">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/ECS/Entity.cpp"
+            timestampString = "568248233.760839"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "Entity::GetComponent(int id)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

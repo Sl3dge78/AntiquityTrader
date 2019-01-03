@@ -13,6 +13,7 @@
 #include <vector>
 #include <stdexcept>
 #include <string>
+#include <map>
 
 #include "Component.hpp"
 
@@ -25,64 +26,51 @@ namespace ECS
     private:
         int ID;
         World * world;
-        std::vector<Component *> components;
-        
+        //std::vector<Component *> components;
+        std::map <int, Component *> components;
         
     public :
         Entity(World * world, int id);
         ~Entity();
+        bool isActive = true;
         
-        template <class T, class... Args>
-        T * AddComponent(Args&&... args);
+        template <class T, class... Args> inline T *    AddComponent(Args&&... args);
+        template <class T> inline bool                  HasComponent();
+        template <class T> inline T *                   GetComponent();
         
-        template <class T>
-        T * GetComponent();
-        
-        template <class T>
-        void RemoveComponent();
+        template <class T> inline void                  RemoveComponent();
         
         void RemoveAllComponents();
+        //std::vector<Component *> GetAllComponents(){return components;}
         
+    protected :
+        Component *     AddComponent(int id, Component * comp);
+        Component *     GetComponent(int id);
+        bool            HasComponent(int id);
+        void            RemoveComponent(int id);
     };
 
     //Adds a component of type T to an entity
     template <class T, class...Args>
     T * Entity::AddComponent(Args&&...args){
-        T * comp = new T{std::forward<Args>(args)...};
-        components.push_back(comp);
-        comp->entity = this;
-        return comp;
+        return static_cast<T *>( AddComponent(ComponentID::Get<T>(), new T{std::forward<Args>(args)...}) );
+    }
+
+    template <class T> bool Entity::HasComponent()
+    {
+        return HasComponent(ComponentID::Get<T>());
     }
     
     template <class T>
     T * Entity::GetComponent(){
-        for (std::vector<Component *>::iterator it = components.begin() ; it != components.end(); ++it)
-        {
-            if(typeid(**it) == typeid(T))
-            {
-                return dynamic_cast<T *>(*it);
-            }
-        }
-        return nullptr;
+        return static_cast<T *>( GetComponent(ComponentID::Get<T>()) );
     }
-    
+
     //Removes a component from an entity
     template <class T>
     void Entity::RemoveComponent(){
-        for (std::vector<Component *>::iterator it = components.begin() ; it != components.end(); ++it)
-        {
-            if(typeid(**it) == typeid(T))
-            {
-                //We found the component !
-                delete *it;
-                components.erase(it);
-                return;
-            }
-            continue;
-        }
+        RemoveComponent(ComponentID::Get<T>());
         
-        //Unable to find component, throw error
-        throw std::invalid_argument(std::string("No component of type %s found !",typeid(T).name()));
     }
 }
 #endif /* Entity_hpp */

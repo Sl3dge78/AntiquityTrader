@@ -10,10 +10,10 @@
 #define System_hpp
 
 #include <vector>
+#include "Entity.hpp"
 
 namespace ECS
 {
-    class Entity;
 
     class System {
         public :
@@ -25,6 +25,7 @@ namespace ECS
             std::vector<Entity *> GetEntities();
             void SetIsActive(bool val);
             bool GetIsActive();
+            void GetActiveEntities(std::vector<Entity *> * list);
         
         protected:
             std::vector<Entity *> m_entities;
