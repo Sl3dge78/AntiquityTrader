@@ -9,7 +9,7 @@
 #ifndef World_hpp
 #define World_hpp
 
-#include <vector>
+#include <forward_list>
 
 #include "Entity.hpp"
 #include "Component.hpp"
@@ -37,17 +37,23 @@ class World {
     void Draw();
     
     void UpdateSystemsEntities();
+    
+    void SetMainBitmap(ALLEGRO_BITMAP* bmp) { main_bitmap_ = bmp; };
+    void SetMainFont(ALLEGRO_FONT* font) { main_font_ = font; };
 
   private:
+    ALLEGRO_BITMAP* main_bitmap_;
+    ALLEGRO_FONT*   main_font_;
+    
     std::vector<Entity*> entity_list;
     
     //Systems
     ISystem* AddSystem(ISystem* sys);
-    std::vector<ISystem*> systems_;
-    std::vector<InitSystem*> init_systems_;
-    std::vector<InputSystem*> input_systems_;
-    std::vector<UpdateSystem*> update_systems_;
-    std::vector<DrawSystem*> draw_systems_;
+    std::forward_list<ISystem*> systems_;
+    std::forward_list<InitSystem*> init_systems_;
+    std::forward_list<InputSystem*> input_systems_;
+    std::forward_list<UpdateSystem*> update_systems_;
+    std::forward_list<DrawSystem*> draw_systems_;
     
     bool is_systems_entities_list_dirty_ = false;
     

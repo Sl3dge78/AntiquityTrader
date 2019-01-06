@@ -10,5 +10,12 @@
 
 namespace components {
 
+void Transform::Translate(int amt_x, int amt_y) {
+    
+    pos_x_ += amt_x;
+    pos_y_ += amt_y;
+    do_collision_check = true;
+    
+}
 
 } // Namespace components

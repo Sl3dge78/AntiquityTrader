@@ -11,11 +11,14 @@
 namespace systems {
     
 void PlayerSystem::Init() {
+    using namespace components;
+    
     player_ = world_->CreateEntity();
-    player_->AddComponent<components::Transform>(225,45);
-    player_->AddComponent<components::Collider>();
-    player_->AddComponent<components::FontRenderer>('@', al_map_rgb(255, 255, 255));
-    player_->AddComponent<components::Player>();
+    player_->AddComponent<Transform>(225,45);
+    player_->AddComponent<Collider>(COLLIDER_FLAG_PLAYER);
+    player_->AddComponent<TileSetRenderer>(Tile::GetVector2FromTileType(TILE_PLAYER), 0);
+    player_->AddComponent<Player>();
+    player_->AddComponent<Inventory>();
 }
 
 void PlayerSystem::Input(ALLEGRO_EVENT* const ev) {
@@ -23,29 +26,33 @@ void PlayerSystem::Input(ALLEGRO_EVENT* const ev) {
     {
         components::Transform* transform = player_->GetComponent<components::Transform>();
         
-        if(ev->type == ALLEGRO_EVENT_KEY_CHAR)
+        if (ev->type == ALLEGRO_EVENT_KEY_CHAR)
         {
-            switch (ev->keyboard.keycode) {
-                case ALLEGRO_KEY_W:
-                    transform->pos_y_ --;
-                    break;
-                    
-                case ALLEGRO_KEY_S:
-                    transform->pos_y_ ++;
-                    break;
-                    
-                case ALLEGRO_KEY_D:
-                    transform->pos_x_ ++;
-                    break;
-                    
-                case ALLEGRO_KEY_A:
-                    transform->pos_x_ --;
-                    break;
-                    
-                default:
-                    break;
+            if(!player_->GetComponent<components::Player>()->is_in_town_) {
+                int movement_x = 0, movement_y = 0;
+                switch (ev->keyboard.keycode) {
+                    case ALLEGRO_KEY_W:
+                        movement_y = -1;
+                        break;
+                        
+                    case ALLEGRO_KEY_S:
+                        movement_y = 1;
+                        break;
+                        
+                    case ALLEGRO_KEY_D:
+                        movement_x = 1;
+                        break;
+                        
+                    case ALLEGRO_KEY_A:
+                        movement_x = -1;
+                        break;
+                        
+                    default:
+                        break;
+                }
+                transform->Translate(movement_x, movement_y);
             }
-        }else if(ev->type == ALLEGRO_EVENT_KEY_DOWN)
+        } else if (ev->type == ALLEGRO_EVENT_KEY_DOWN)
         {
             switch (ev->keyboard.keycode) {
                 case ALLEGRO_KEY_ENTER:
@@ -55,31 +62,25 @@ void PlayerSystem::Input(ALLEGRO_EVENT* const ev) {
                     break;
             }
         }
-            
     }
 }
 
 void PlayerSystem::Interact() {
 
     //Town interaction
-    if(player_->GetComponent<components::Collider>()->below_tile_ == components::TILE_TOWN)
+    if (player_->GetComponent<components::Collider>()->colliding_flag_ == components::COLLIDER_FLAG_TOWN)
     {
-        //TODO
-        if(!isInTown)
-        {
-            //Todo : Get town at player position
-            m_CurrentTown = nullptr;
-            //m_UISystem->SetCurrentTown(m_CurrentTown);
-            isInTown = true;
+        components::Player* p_comp = player_->GetComponent<components::Player>();
+        if(p_comp->is_in_town_) {
+            p_comp->is_in_town_ = false;
+            p_comp->current_town_->is_player_in_ = false;
+            p_comp->current_town_ = nullptr;
             
+        } else {
+            p_comp->is_in_town_ = true;
+            p_comp->current_town_ = player_->GetComponent<components::Collider>()->colliding_entity_->GetComponent<components::Town>();
+            p_comp->current_town_->is_player_in_ = true;
         }
-        else
-        {
-            m_CurrentTown = nullptr;
-            isInTown = false;
-        }
-        
-        //m_UISystem->SetIsTownUIActive(isInTown);
     }
 }
 } // Namespace systems

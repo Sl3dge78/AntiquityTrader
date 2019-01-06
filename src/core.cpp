@@ -16,10 +16,14 @@ Core::Core() {
 	if (!display_)
 		throw runtime_error("Failed to initialize: Display\n");
     DebugLog("Init: Display initialized\n");
-
+    
 	if (!al_init_font_addon())
         throw runtime_error("Failed to initialize: Font\n");
     DebugLog("Init: Font add-on initialized\n");
+    
+    if(!al_init_image_addon())
+        throw runtime_error("Failed to initialize: Images\n");
+    DebugLog("Init: image initialized\n");
     
     if(!al_init_primitives_addon())
         throw runtime_error("Failed to initialize: Primitives\n");
@@ -39,9 +43,16 @@ Core::Core() {
 		throw runtime_error("Failed to initialize: Core Timer\n");
 	DebugLog("Init: Core Timer\n");
     
+    ALLEGRO_BITMAP* bmp = al_load_bitmap("resources/tileset.png");
+    if(!bmp)
+        throw runtime_error("Failed to initialize: Main tileset\n");
+    
     world_ = new ECS::World();
     if (!world_)
         throw runtime_error("Failed to initialize: World\n");
+    
+    world_->SetMainBitmap(bmp);
+    world_->SetMainFont(al_create_builtin_font());
     DebugLog("Init: World\n");
     
 	keep_core_running_ = true;
@@ -63,6 +74,9 @@ Core::~Core() {
     
     al_shutdown_primitives_addon();
         DebugLog("Destroyed: Primitives\n");
+    
+    al_shutdown_image_addon();
+        DebugLog("Destroyed: Image Addon\n");
     
 	al_uninstall_keyboard();
 	    DebugLog("Destroyed: Keyboard\n");
@@ -100,14 +114,14 @@ void Core::Start() {
 	//Start main loop timer
 	al_start_timer(core_timer_);
 	al_register_event_source(event_queue_, al_get_timer_event_source(core_timer_));
-
-    CORE_FONT = al_create_builtin_font();
     
-    world_->CreateSystem<systems::ObjectRendererSystem>(CORE_FONT);
-    world_->CreateSystem<systems::PlayerSystem>();
-    world_->CreateSystem<systems::MapSystem>(CORE_FONT);
+    world_->CreateSystem<systems::ObjectRendererSystem>();
+    world_->CreateSystem<systems::MapSystem>();
     world_->CreateSystem<systems::CameraSystem>();
-    world_->CreateSystem<systems::MapCollisionSystem>();
+    world_->CreateSystem<systems::Collision>();
+    world_->CreateSystem<systems::PlayerSystem>();
+    world_->CreateSystem<systems::TownUI>();
+    
     world_->Init();
 }
 
@@ -129,7 +143,7 @@ void Core::Update() {
 		redraw_ = true;
 		break;
 
-	default: // We caught an unknown type of event, we delegate its' handling to the input systems
+	default: // We caught an unknown type of event, we delegate its handling to the input systems
         world_->Input(& ev);
 		break;
 

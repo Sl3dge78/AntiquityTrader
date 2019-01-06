@@ -9,30 +9,55 @@
 
 namespace systems {
     
-ObjectRendererSystem::ObjectRendererSystem(ALLEGRO_FONT* font) {
-    font_ = font;
-    this->AddComponentFilter<components::FontRenderer>();
+ObjectRendererSystem::ObjectRendererSystem() {
+    this->AddComponentFilter<components::TileSetRenderer>();
+    this->pos_z = 0;
 }
 
+void ObjectRendererSystem::OnEntityAdded(ECS::Entity* entity) {
+
+    entities_.sort([](const ECS::Entity* e1, const ECS::Entity* e2)
+                   {
+                       return e1->GetComponent<components::TileSetRenderer>()->pos_z_ > e2->GetComponent<components::TileSetRenderer>()->pos_z_;
+                   });
+    
+}
+    
 void ObjectRendererSystem::Draw() {
     
     Rect clip_rect = CameraSystem::GetClipRect();
     
-    for(auto&& entity : entities_)
+    for(auto& entity : entities_)
     {
-        auto rdr = entity->GetComponent<components::FontRenderer>();
+        auto rdr = entity->GetComponent<components::TileSetRenderer>();
         auto trfm = entity->GetComponent<components::Transform>();
-        if(trfm->pos_x_ > clip_rect.x &&
-           trfm->pos_y_ > clip_rect.y &&
-           trfm->pos_x_ < clip_rect.x+clip_rect.width &&
-           trfm->pos_y_ < clip_rect.y+clip_rect.height)
+        if(trfm->GetPosX() > clip_rect.x &&
+           trfm->GetPosY() > clip_rect.y &&
+           trfm->GetPosX() < clip_rect.x+clip_rect.width &&
+           trfm->GetPosY() < clip_rect.y+clip_rect.height)
         {
-            al_draw_text(font_,
-                         rdr->color_,
-                         (trfm->pos_x_-clip_rect.x) * constants::kTileWidth,
-                         (trfm->pos_y_-clip_rect.y) * constants::kTileHeight,
-                         ALLEGRO_ALIGN_LEFT,
-                         rdr->text_);
+
+            al_draw_scaled_bitmap(bitmap_,
+                                  rdr->pos_.x * constants::kFileTileWidth,
+                                  rdr->pos_.y * constants::kFileTileHeight,
+                                  constants::kFileTileWidth,
+                                  constants::kFileTileHeight,
+                                  
+                                  (trfm->GetPosX()-clip_rect.x) * constants::kTileWidth,
+                                  (trfm->GetPosY()-clip_rect.y) * constants::kTileHeight,
+                                  constants::kTileWidth,
+                                  constants::kTileHeight,
+                                  
+                                  0);
+            /*al_draw_bitmap_region(bitmap_,
+                                  rdr->pos_.x * constants::kFileTileWidth,
+                                  rdr->pos_.y * constants::kFileTileHeight,
+                                  constants::kFileTileWidth,
+                                  constants::kFileTileHeight,
+                                  (trfm->GetPosX()-clip_rect.x) * constants::kTileWidth,
+                                  (trfm->GetPosY()-clip_rect.y) * constants::kTileHeight,
+                                  0);
+             */
         }
     }
 }
@@ -66,8 +91,9 @@ void CameraSystem::Update() {
             components::Transform* target_transform = e->GetComponent<components::Transform>();
             components::Transform* camera_transform = main_camera_->GetComponent<components::Transform>();
             
-            camera_transform->pos_y_ = target_transform->pos_y_;
-            camera_transform->pos_x_ = target_transform->pos_x_;
+            int movement_x = target_transform->GetPosX() - camera_transform->GetPosX();
+            int movement_y = target_transform->GetPosY() - camera_transform->GetPosY();
+            camera_transform->Translate(movement_x, movement_y);
             
             //Test for collision
             /*
@@ -81,8 +107,8 @@ void CameraSystem::Update() {
             else if (camera_transform->posY > bounds_.height)
                 camera_transform->posY = bounds_.height;
             */
-            CameraSystem::clip_rect_.x = camera_transform->pos_x_ - (constants::kAmoutOfTilesOnScreenX/2);
-            CameraSystem::clip_rect_.y = camera_transform->pos_y_ - (constants::kAmoutOfTilesOnScreenY/2);
+            CameraSystem::clip_rect_.x = camera_transform->GetPosX() - (constants::kAmoutOfTilesOnScreenX/2);
+            CameraSystem::clip_rect_.y = camera_transform->GetPosY() - (constants::kAmoutOfTilesOnScreenY/2);
         }
     }
 }

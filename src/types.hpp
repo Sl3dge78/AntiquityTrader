@@ -6,9 +6,12 @@
 //  Copyright © 2018 Sledge. All rights reserved.
 //
 
-#ifndef Rect_hpp
-#define Rect_hpp
+#ifndef types_hpp
+#define types_hpp
 
+struct Vector2 {
+    int x, y;
+};
 
 struct Rect {
     int x, y;

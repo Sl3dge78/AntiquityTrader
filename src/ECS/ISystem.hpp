@@ -66,9 +66,13 @@ class UpdateSystem : public ISystem
 /// Draw gets called every frame after all logic
 class DrawSystem : public ISystem
 {
+    friend class World;
+    
   protected :
     DrawSystem() = default;
     ALLEGRO_FONT* font_;
+    ALLEGRO_BITMAP* bitmap_;
+    int pos_z = 0;
     
   public :
     virtual ~DrawSystem() = default;
@@ -104,13 +108,13 @@ class InitSystem
 /// A system that requires a reference to the world to work.
 class WorldSetSystem
 {
+    friend class World;
   protected:
     WorldSetSystem() = default;
     World* world_;
     
   public:
     virtual ~WorldSetSystem() = default;
-    virtual inline void SetWorld(World* world){world_ = world;};
 };
 
 

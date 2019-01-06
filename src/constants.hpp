@@ -13,6 +13,9 @@ extern const float     kFramerate;
 extern const int       kWindowWidth;
 extern const int       kWindowHeight;
 
+extern const int       kFileTileWidth;
+extern const int       kFileTileHeight;
+
 extern const int       kTileWidth;
 extern const int       kTileHeight;
 

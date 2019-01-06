@@ -27,8 +27,8 @@ class PlayerSystem : public ECS::InputSystem, public ECS::WorldSetSystem, public
     
   protected:
     void Interact();
-    bool isInTown = false;
-    ECS::Entity * m_CurrentTown = NULL;
+    bool is_in_town_ = false;
+    ECS::Entity * current_town_ = NULL;
     ECS::Entity * player_;
     
 };

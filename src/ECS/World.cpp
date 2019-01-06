@@ -42,26 +42,34 @@ void World::DeleteAllEntities() {
 ISystem* World::AddSystem(ISystem* sys) {
     
     if (dynamic_cast<InitSystem*>(sys) != nullptr) {
-        init_systems_.push_back(dynamic_cast<InitSystem*>(sys));
+        init_systems_.push_front(dynamic_cast<InitSystem*>(sys));
     }
     
     if (dynamic_cast<InputSystem*>(sys) != nullptr) {
-        input_systems_.push_back(dynamic_cast<InputSystem*>(sys));
+        input_systems_.push_front(dynamic_cast<InputSystem*>(sys));
     }
     
     if (dynamic_cast<UpdateSystem*>(sys) != nullptr) {
-        update_systems_.push_back(dynamic_cast<UpdateSystem*>(sys));
+        update_systems_.push_front(dynamic_cast<UpdateSystem*>(sys));
     }
     
     if (dynamic_cast<DrawSystem*>(sys) != nullptr) {
-        draw_systems_.push_back(dynamic_cast<DrawSystem*>(sys));
+        draw_systems_.push_front(dynamic_cast<DrawSystem*>(sys));
+        dynamic_cast<DrawSystem*>(sys)->bitmap_ = main_bitmap_;
+        dynamic_cast<DrawSystem*>(sys)->font_ = main_font_;
+        
+        draw_systems_.sort([](const DrawSystem* sys1, const DrawSystem* sys2)
+                       {
+                           return sys1->pos_z > sys2->pos_z;
+                       });
+        
     }
     
     if (dynamic_cast<WorldSetSystem*>(sys) != nullptr) {
-        dynamic_cast<WorldSetSystem*>(sys)->SetWorld(this);
+        dynamic_cast<WorldSetSystem*>(sys)->world_ = this;
     }
     
-    systems_.push_back(sys);
+    systems_.push_front(sys);
     return sys;
 }
 

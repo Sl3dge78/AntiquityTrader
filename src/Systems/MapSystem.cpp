@@ -12,15 +12,11 @@ using namespace std;
 using namespace components;
 
 namespace systems {
-Tile TILES_LIST[4] = {
-    TILES_LIST[TILE_WATER] = (Tile){.color_ = (ALLEGRO_COLOR){.r = 0.33, .g = 0.50, .b = 1, .a = 1}, .character_ = '~'},
-    TILES_LIST[TILE_LAND] = (Tile){.color_ = (ALLEGRO_COLOR){.r = 0.04, .g = 0.64, .b = 0, .a = 1}, .character_ = 'M'},
-    TILES_LIST[TILE_TOWN] = (Tile){.color_ = (ALLEGRO_COLOR){.r = 1, .g = 0, .b = 0, .a = 1}, .character_ = 'T'},
-    TILES_LIST[TILE_COAST] = (Tile){.color_ = (ALLEGRO_COLOR){.r = 1, .g = 1, .b = 0, .a = 1}, .character_ = 'w'},
-};
 
 void MapSystem::Init() {
    
+    this->pos_z = 1;
+    
     // Creates the map entity
     map_entity_ = world_->CreateEntity();
     Map* mapComponent = map_entity_->AddComponent<Map>();
@@ -51,9 +47,7 @@ void MapSystem::Init() {
             else if(ch == 'M')
                 mapComponent->map[currentPos] = TileType::TILE_LAND;
             else if (ch == 'T')
-            {
                 mapComponent->map[currentPos] = TileType::TILE_TOWN;
-            }
             else
                 mapComponent->map[currentPos] = TileType::TILE_COAST;
             
@@ -69,12 +63,20 @@ void MapSystem::Init() {
     
     while(it) {
         auto town = world_->CreateEntity();
-        int position = std::stoi(al_get_config_value(townFile, sec, "PosX")) + std::stoi(al_get_config_value(townFile, sec, "PosY")) * mapComponent->width_;
+        
+        int pos_x = std::stoi(al_get_config_value(townFile, sec, "PosX"));
+        int pos_y = std::stoi(al_get_config_value(townFile, sec, "PosY"));
         string name = al_get_config_value(townFile, sec, "Name");
         
-        town->AddComponent<components::Town>(position, name);
+        town->AddComponent<components::Town>(name);
+        town->AddComponent<components::Transform>(pos_x, pos_y);
+        town->AddComponent<components::Collider>(components::COLLIDER_FLAG_TOWN);
+        auto inventory = town->AddComponent<components::Inventory>();
+        inventory->inventory_[INV_OBJECT_CHOUX] = 10;
+        inventory->inventory_[INV_OBJECT_FLEUR] = 20;
         town_entities_.push_back(town);
         
+        int position = pos_x + pos_y * mapComponent->width_;
         mapComponent->map[position] = TileType::TILE_TOWN;
         
         sec = al_get_next_config_section(&it);
@@ -89,11 +91,11 @@ void MapSystem::Draw()
     
     // the map's transform serves as an offset
     auto trsfm = map_entity_->GetComponent<components::Transform>();
-    int offX = 0, offY = 0;
+    int off_x = 0, off_y = 0;
     if(trsfm)
     {
-        offX = trsfm->pos_x_;
-        offY = trsfm->pos_y_;
+        off_x = trsfm->GetPosX();
+        off_y = trsfm->GetPosY();
     }
     
     //Draw each tile
@@ -101,39 +103,46 @@ void MapSystem::Draw()
     {
         for (int x = 0; x < constants::kAmoutOfTilesOnScreenX; x++)
         {
-            //Tile tile = map->map[y*map->width+x];
+            int x_map_position = off_x + x;
+            int y_map_position = off_y + y;
             
             int id = (y+clipRect.y)*map->width_+x+clipRect.x;
+            if(id < 0 || id > map->width_ * map->height_)
+                break;
+            Vector2 blit = components::Tile::GetVector2FromTileType(map->map[id]);
             
-            Tile tile = TILES_LIST[map->map[id]];
+            al_draw_scaled_bitmap(bitmap_,
+                                  blit.x * constants::kFileTileWidth,
+                                  blit.y * constants::kFileTileHeight,
+                                  constants::kFileTileWidth,
+                                  constants::kFileTileHeight,
+                                  
+                                  x_map_position * constants::kTileWidth,
+                                  y_map_position * constants::kTileHeight,
+                                  constants::kTileWidth,
+                                  constants::kTileHeight,
+                                  0);
             
-            al_draw_text(font_,
+            /*
+            al_draw_bitmap_region(bitmap_,
+                                  blit.x * constants::kFileTileWidth,
+                                  blit.y * constants::kFileTileHeight,
+                                  constants::kTileWidth, constants::kTileHeight,
+                                  x_map_position * constants::kTileWidth,
+                                  y_map_position * constants::kTileHeight,
+                                  0);
+            /*
+            //Tile tile = TILES_LIST[map->map[id]];
+             al_draw_text(font_,
                          tile.color_,
                          (offX + x)* constants::kTileWidth,
                          (offY + y) * constants::kTileHeight,
                          ALLEGRO_ALIGN_LEFT,
                          &tile.character_);
+             */
             
         }
     }
 }
-/*
-ECS::Entity * MapSystem::GetTownAtPosition(int x, int y) {
-    //TODO return town entity at position x & y;
-    auto mapComp = mapEntity->GetComponent<components::Map>();
-    int position = x + (y * mapComp->width);
     
-    for(auto&& town : townEntities)
-    {
-        auto comp = town->GetComponent<components::Town>();
-        if(comp->GetPosition() == position)
-        {
-            return town;
-        }
-    }
-    
-    return nullptr;
-}
-*/
-
 } // Namespace systems

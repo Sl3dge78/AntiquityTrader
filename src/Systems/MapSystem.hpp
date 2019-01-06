@@ -23,7 +23,6 @@
 namespace systems {
 class MapSystem : public ECS::DrawSystem, public ECS::WorldSetSystem, public ECS::InitSystem {
   public:
-    MapSystem(ALLEGRO_FONT* font){ font_ = font; };
     
     void Init();
     void Draw();

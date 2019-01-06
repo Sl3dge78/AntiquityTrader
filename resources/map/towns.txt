@@ -6,4 +6,4 @@ PosY = 45
 [2]
 Name = Athenae
 PosX = 329
-PosY = 89
+PosY = 69

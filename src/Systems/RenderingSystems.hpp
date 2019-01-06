@@ -12,7 +12,7 @@
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_font.h>
 
-#include "../Rect.hpp"
+#include "../types.hpp"
 #include "../constants.hpp"
 
 #include "../ECS/ECS.hpp"
@@ -21,9 +21,10 @@
 namespace systems {
 
 struct ObjectRendererSystem : public ECS::DrawSystem {
-    ObjectRendererSystem(ALLEGRO_FONT* font);
+    ObjectRendererSystem();
     
     void ChangeFilters();
+    void OnEntityAdded(ECS::Entity* entity);
     void Init();
     void Draw();
 };
