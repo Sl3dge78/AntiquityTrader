@@ -12,24 +12,38 @@
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_font.h>
 
-#include "Macros.hpp"
 #include "../Rect.hpp"
+#include "../constants.hpp"
 
 #include "../ECS/ECS.hpp"
-#include "Components.hpp"
-#include "../Components/Component_Map.hpp"
+#include "components.hpp"
 
-struct ObjectRendererSystem : public ECS::System
-{
-    public :
-    void Draw(const Rect clipRect);
+namespace systems {
+
+struct ObjectRendererSystem : public ECS::DrawSystem, public ECS::InitSystem {
+    ObjectRendererSystem(ALLEGRO_FONT* font) { font_ = font; };
+    ~ObjectRendererSystem() = default;
+    
+    void Init();
+    void Draw();
 };
-/*
-struct MapRendererSystem : public ECS::System
-{
+
+class CameraSystem : public ECS::UpdateSystem, public ECS::InitSystem, public ECS::WorldSetSystem {
 public:
-    void Draw(const Rect clipRect);
+    CameraSystem() = default;
+    ~CameraSystem() = default;
+    
+    void Init();
+    void Update();
+    
+    static Rect     clip_rect_;
+    static Rect     GetClipRect() { return clip_rect_; };
+    
+private:
+    ECS::Entity*    main_camera_ = nullptr;
+    ECS::Entity*    map_ = nullptr;
+    Rect            bounds_; // TODO : Move bounds into its' separate component
+    
 };
-*/
-
+} // Namespace systems
 #endif /* RendererSystem_hpp */

@@ -13,28 +13,27 @@
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_font.h>
 
-#include "../ECS/ECS.hpp"
-#include "../Components/Component_Map.hpp"
+#include "../constants.hpp"
 
-class MapSystem : public ECS::System
-{
-public:
-    MapSystem(ALLEGRO_FONT * font, std::string mapFileName, std::string townFileName, ECS::World * world);
-    ~MapSystem();
-    void Draw(const Rect clipRect);
+#include "../ECS/ECS.hpp"
+#include "../Components/components.hpp"
+
+#include "RenderingSystems.hpp"
+
+namespace systems {
+class MapSystem : public ECS::DrawSystem, public ECS::WorldSetSystem, public ECS::InitSystem {
+  public:
+    MapSystem(ALLEGRO_FONT* font){ font_ = font; };
+    ~MapSystem() = default;
+    void Init();
+    void Draw();
     
-    ECS::Entity * mapEntity;
+    ECS::Entity* map_entity_ = nullptr;
     
-    ECS::Entity * GetTownAtPosition(int x, int y);
-    
-    
-private:
-    ALLEGRO_FONT * font;
-    std::vector<ECS::Entity *> townEntities;
-    
-    
+  private:
+    std::vector<ECS::Entity*> town_entities_;
     
 };
 
-
+} // Namespace systems
 #endif /* TownSystem_hpp */

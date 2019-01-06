@@ -8,31 +8,38 @@
 
 #include "PlayerSystem.hpp"
 
+namespace systems {
 
-void PlayerSystem::Update(ALLEGRO_EVENT * ev)
-{
-    if(isActive)
+void PlayerSystem::Init() {
+    player_ = world_->CreateEntity();
+    player_->AddComponent<components::Transform>(225,45);
+    player_->AddComponent<components::Collider>();
+    player_->AddComponent<components::FontRenderer>('@', al_map_rgb(255, 255, 255));
+    player_->AddComponent<components::Player>();
+}
+
+void PlayerSystem::Input(ALLEGRO_EVENT* const ev) {
+    if(is_active_)
     {
-        
-        Component_Transform * transform = player->GetComponent<Component_Transform>();
+        components::Transform* transform = player_->GetComponent<components::Transform>();
         
         if(ev->type == ALLEGRO_EVENT_KEY_CHAR)
         {
             switch (ev->keyboard.keycode) {
                 case ALLEGRO_KEY_W:
-                    transform->posY --;
+                    transform->pos_y_ --;
                     break;
                     
                 case ALLEGRO_KEY_S:
-                    transform->posY ++;
+                    transform->pos_y_ ++;
                     break;
                     
                 case ALLEGRO_KEY_D:
-                    transform->posX ++;
+                    transform->pos_x_ ++;
                     break;
                     
                 case ALLEGRO_KEY_A:
-                    transform->posX --;
+                    transform->pos_x_ --;
                     break;
                     
                 default:
@@ -51,12 +58,12 @@ void PlayerSystem::Update(ALLEGRO_EVENT * ev)
     }
 }
 
-void PlayerSystem::Interact()
-{
+void PlayerSystem::Interact() {
 
     //Town interaction
-    if(player->GetComponent<Component_Collider>()->belowTile == TILE_TOWN)
+    if(player_->GetComponent<components::Collider>()->below_tile_ == components::TILE_TOWN)
     {
+        std::cout << "Zradabaldjan";
         //TODO
         if(!isInTown)
         {
@@ -72,9 +79,7 @@ void PlayerSystem::Interact()
             isInTown = false;
         }
         
-        
         //m_UISystem->SetIsTownUIActive(isInTown);
-        
     }
 }
-
+} // Namespace systems

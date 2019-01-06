@@ -8,19 +8,26 @@
 
 #include "MapCollisionSystem.hpp"
 
+namespace systems {
+
 MapCollisionSystem::MapCollisionSystem(ECS::Entity *map) { 
-    this->map = map->GetComponent<Component_Map>();
+    this->map = map->GetComponent<components::Map>();
 }
 
+void MapCollisionSystem::Init(){
+    this->AddComponentFilter<components::Collider>();
+}
+    
 void MapCollisionSystem::Update()
 {
-    for(auto && e : m_entities)
+    for(auto && e : entities_)
     {
-        auto col = e->GetComponent<Component_Collider>();
-        auto transform = e->GetComponent<Component_Transform>();
+        auto col = e->GetComponent<components::Collider>();
+        auto transform = e->GetComponent<components::Transform>();
         
-        col->belowTile = map->map[transform->posY * map->width + transform->posX];
+        col->below_tile_ = map->map[transform->pos_y_ * map->width_ + transform->pos_x_];
         
     }
     
 }
+} // Namespace systems

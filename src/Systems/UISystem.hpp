@@ -14,29 +14,31 @@
 #include <allegro5/allegro_primitives.h>
 
 #include "../ECS/ECS.hpp"
-#include "../Components/UI.hpp"
+#include "../Components/components.hpp"
 
-class UISystem : public ECS::System
+namespace systems {
+class UISystem : public ECS::InitSystem, public ECS::DrawSystem
 {
-    public :
+  public :
     //GENERIC
     UISystem(ALLEGRO_FONT * font):font(font){};
-    void Start();//Creates the UI Instances
+    
+    void Init();//Creates the UI Instances
     void Draw(); // Draws all activated UIs
     
     //TOWN
     void SetCurrentTown(ECS::Entity * town);
     void SetIsTownUIActive(bool value);
     
-private:
+  private:
     // GENERIC
-    ALLEGRO_FONT * font;
+    ALLEGRO_FONT*   font;
     
     //TOWN
-    ECS::Entity * townUI = nullptr;
-    ECS::Entity * currentTown = nullptr;
-    bool isTownUIActive = false;
+    ECS::Entity*    townUI = nullptr;
+    ECS::Entity*    currentTown = nullptr;
+    bool            isTownUIActive = false;
     
 };
-
+} // Namespace systems
 #endif /* UIManager_hpp */

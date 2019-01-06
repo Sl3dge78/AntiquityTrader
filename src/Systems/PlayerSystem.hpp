@@ -9,26 +9,30 @@
 #ifndef PlayerSystem_hpp
 #define PlayerSystem_hpp
 
+#include <iostream>
+
 #include "allegro5/allegro.h"
 
+#include "../constants.hpp"
+
 #include "../ECS/ECS.hpp"
-#include "../Components/Components.hpp"
-#include "../Systems/MapCollisionSystem.hpp"
-#include "../Systems/UISystem.hpp"
+#include "../Components/components.hpp"
 
+namespace systems {
 
-class PlayerSystem : public ECS::System
-{
-    public :
-    PlayerSystem(ECS::Entity * player):player(player){};
-    void Update(ALLEGRO_EVENT * ev);
+class PlayerSystem : public ECS::InputSystem, public ECS::WorldSetSystem, public ECS::InitSystem {
+  public :
+    PlayerSystem() = default;
+    ~PlayerSystem() = default;
+    void Init();
+    void Input(ALLEGRO_EVENT* const ev);
     
-protected:
+  protected:
     void Interact();
     bool isInTown = false;
     ECS::Entity * m_CurrentTown = NULL;
-    ECS::Entity * player;
+    ECS::Entity * player_;
     
 };
-
+} // Namespace systems
 #endif /* PlayerSystem_hpp */

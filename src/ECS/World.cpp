@@ -11,50 +11,112 @@
 namespace ECS
 {
 
-    World::World() {
-        
+World::~World() {
+    DeleteAllSystems();
+    DeleteAllEntities();
+}
+
+// == ENTITIES ==
+
+Entity* World::CreateEntity() {
+    Entity* e = new Entity();
+    entity_list.push_back(e);
+    
+    is_systems_entities_list_dirty_ = true;
+    
+    return e;
+}
+
+void World::DeleteAllEntities() {
+    for(Entity* e : entity_list) {
+        delete e;
     }
+    
+    is_systems_entities_list_dirty_ = true;
+    
+    entity_list.clear();
+}
 
+// == SYSTEMS ==
 
-    World::~World() {
-        DeleteAllSystems();
-        DeleteAllEntities();
+ISystem* World::AddSystem(ISystem* sys) {
+    
+    if (dynamic_cast<InitSystem*>(sys) != nullptr) {
+        init_systems_.push_back(dynamic_cast<InitSystem*>(sys));
     }
-
-    Entity * World::AddEntity() {
-        Entity * e = new Entity(this, getEntityID());
-        entityList.push_back(e);
-        return e;
+    
+    if (dynamic_cast<InputSystem*>(sys) != nullptr) {
+        input_systems_.push_back(dynamic_cast<InputSystem*>(sys));
     }
-
-
-    int World::getEntityID() {
-        //TODO
-        return 0;
+    
+    if (dynamic_cast<UpdateSystem*>(sys) != nullptr) {
+        update_systems_.push_back(dynamic_cast<UpdateSystem*>(sys));
     }
-
-
-
-
-    void World::DeleteAllSystems() {
-        for (std::vector<System *>::iterator it = systemsList.begin() ; it != systemsList.end(); )
-        {
-            delete *it;
-            systemsList.erase(it);
-        }
+    
+    if (dynamic_cast<DrawSystem*>(sys) != nullptr) {
+        draw_systems_.push_back(dynamic_cast<DrawSystem*>(sys));
     }
-
-
-    void World::DeleteAllEntities() {
-        for (std::vector<Entity *>::iterator it = entityList.begin() ; it != entityList.end(); )
-        {
-            delete *it;
-            it = entityList.erase(it);
-        }
+    
+    if (dynamic_cast<WorldSetSystem*>(sys) != nullptr) {
+        dynamic_cast<WorldSetSystem*>(sys)->SetWorld(this);
     }
+    
+    systems_.push_back(sys);
+    return sys;
+}
 
+void World::DeleteAllSystems() {
+    for(ISystem* sys : systems_) {
+        delete sys;
+    }
+    systems_.clear();
+    init_systems_.clear();
+    input_systems_.clear();
+    update_systems_.clear();
+    draw_systems_.clear();
+}
 
-    void World::Update() {
-        //Add entities automatically to systems
+void World::Init() {
+    for(InitSystem* system: init_systems_) {
+        system->Init();
     }
 }
+
+void World::Input(ALLEGRO_EVENT* const ev) {
+    for(InputSystem* system: input_systems_) {
+        system->Input(ev);
+    }
+}
+
+void World::Update() {
+    for(UpdateSystem* system: update_systems_) {
+        system->Update();
+    }
+}
+
+void World::Draw() {
+    for(DrawSystem* system: draw_systems_) {
+        system->Draw();
+    }
+}
+    
+void World::UpdateSystemsEntities() {
+     // TODO : Call this only when needed
+    if(is_systems_entities_list_dirty_){
+        for (auto& system : systems_) {
+            if (system->filter_ != -1) {
+                system->entities_.clear();
+                for (auto& entity : entity_list) {
+                    if(entity->HasComponent(system->filter_)) {
+                        system->entities_.push_back(entity);
+                    }
+                }
+            }
+        }
+    }
+}
+    
+}
+
+
+

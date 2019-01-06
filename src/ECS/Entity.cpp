@@ -11,43 +11,40 @@
 namespace ECS
 {
 
-    Entity::Entity(World *world, int id) {
-        this->world = world;
-        this->ID = id;
-    }
+Entity::~Entity() {
+    this->Entity::RemoveAllComponents();
+}
 
-    Entity::~Entity() {
-        this->Entity::RemoveAllComponents();
+void Entity::RemoveAllComponents() {
+    for (auto pair : components_) {
+        delete pair.second;
     }
+    components_.clear();
+}
 
-    void Entity::RemoveAllComponents(){
-        components.clear();
-    }
-    
-    Component * Entity::AddComponent(int id, Component * comp)
+Component* Entity::AddComponent(const int id, Component* comp) {
+    components_[id] = comp;
+    return comp;
+}
+
+bool Entity::HasComponent(const int id) const {
+    return (components_.find(id) != components_.end()) ;
+}
+
+Component* Entity::GetComponent(const int id) const {
+    if (HasComponent(id))
     {
-        components[id] = comp;
-        return comp;
+        return components_.at(id);
     }
-    
-    bool Entity::HasComponent(int id) {
-        return (components.find(id) != components.end()) ;
-    }
-    
-    Component * Entity::GetComponent(int id) {
-        if (HasComponent(id))
-        {
-            return components.at(id);
-        }
-        else
-            return nullptr;
-    }
-    
-    void Entity::RemoveComponent(int id)
+    else
+        return nullptr;
+}
+
+void Entity::RemoveComponent(const int id) {
+    if(HasComponent(id))
     {
-        if(HasComponent(id))
-        {
-            components.erase(id);
-        }
+        delete components_[id];
+        components_.erase(id);
     }
+}
 }

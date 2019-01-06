@@ -7,69 +7,83 @@
 //
 #include "RenderingSystems.hpp"
 
-void ObjectRendererSystem::Draw(const Rect clipRect) {
+namespace systems {
     
-    auto entities = GetEntities();
-    for(ECS::Entity* entity : entities)
-    {
-        auto rdr = entity->GetComponent<Component_FontRenderer>();
-        auto trfm = entity->GetComponent<Component_Transform>();
-        if(trfm->posX > clipRect.x && trfm->posY > clipRect.y && trfm->posX < clipRect.x+clipRect.width && trfm->posY < clipRect.y+clipRect.height)
-        {
-            al_draw_text(rdr->font,
-                     rdr->color,
-                     (trfm->posX-clipRect.x) * TILE_WIDTH,
-                     (trfm->posY-clipRect.y) * TILE_HEIGHT,
-                     ALLEGRO_ALIGN_LEFT,
-                     rdr->text);
-        }
-        
-    }
+void ObjectRendererSystem::Init() {
+    this->AddComponentFilter<components::FontRenderer>();
 }
-/*
-Tile TILES_LIST[4] = {
-    TILES_LIST[TILE_WATER] = (Tile){.color = (ALLEGRO_COLOR){.r = 0.33, .g = 0.50, .b = 1, .a = 1}, .character = '~'},
-    TILES_LIST[TILE_LAND] = (Tile){.color = (ALLEGRO_COLOR){.r = 0,04, .g = 0.64, .b = 0, .a = 1}, .character = 'M'},
-    TILES_LIST[TILE_TOWN] = (Tile){.color = (ALLEGRO_COLOR){.r = 1, .g = 1, .b = 1, .a = 1}, .character = 'W'},
-    TILES_LIST[TILE_COAST] = (Tile){.color = (ALLEGRO_COLOR){.r = 1, .g = 1, .b = 0, .a = 1}, .character = 'w'},
-};
 
-void MapRendererSystem::Draw(const Rect clipRect)
-{
-    auto entities = GetEntities();
-    for(ECS::Entity* entity : entities)
+void ObjectRendererSystem::Draw() {
+    
+    Rect clip_rect = CameraSystem::GetClipRect();
+    
+    for(auto&& entity : entities_)
     {
-        auto map = entity->GetComponent<Component_Map>();
-        
-        // the map's transform serves as an offset
-        auto trsfm = entity->GetComponent<Component_Transform>();
-        int offX = 0, offY = 0;
-        if(trsfm)
+        auto rdr = entity->GetComponent<components::FontRenderer>();
+        auto trfm = entity->GetComponent<components::Transform>();
+        if(trfm->pos_x_ > clip_rect.x &&
+           trfm->pos_y_ > clip_rect.y &&
+           trfm->pos_x_ < clip_rect.x+clip_rect.width &&
+           trfm->pos_y_ < clip_rect.y+clip_rect.height)
         {
-            offX = trsfm->posX;
-            offY = trsfm->posY;
-        }
-        
-        //Draw each tile
-        for (int y = 0; y < TILE_AMT_Y;y++)
-        {
-            for (int x = 0; x < TILE_AMT_X;x++)
-            {
-                //Tile tile = map->map[y*map->width+x];
-                
-                int id = (y+clipRect.y)*map->width+x+clipRect.x;
-                
-                Tile tile = TILES_LIST[map->map[id]];
-                
-                al_draw_text(map->font,
-                             tile.color,
-                             (offX + x)* TILE_WIDTH,
-                             (offY + y) * TILE_HEIGHT,
-                             ALLEGRO_ALIGN_LEFT,
-                             &tile.character);
-                
-            }
+            al_draw_text(font_,
+                         rdr->color_,
+                         (trfm->pos_x_-clip_rect.x) * constants::kTileWidth,
+                         (trfm->pos_y_-clip_rect.y) * constants::kTileHeight,
+                         ALLEGRO_ALIGN_LEFT,
+                         rdr->text_);
         }
     }
 }
-*/
+
+  //
+  // CAMERA SYSTEM
+  //
+
+Rect CameraSystem::clip_rect_ = {0,0,0,0};
+
+void CameraSystem::Init() {
+    main_camera_ = world_->CreateEntity();
+    main_camera_->AddComponent<components::Transform>();
+    
+    CameraSystem::clip_rect_.width = constants::kAmoutOfTilesOnScreenX;
+    CameraSystem::clip_rect_.height = constants::kAmoutOfTilesOnScreenY;
+    /*
+    bounds_ = Rect{ .x = constants::kAmoutOfTilesOnScreenX/2,
+                    .y = constants::kAmoutOfTilesOnScreenY/2,
+                    map_->GetComponent<components::Map>()->width - constants::kAmoutOfTilesOnScreenX/2,
+                    map_->GetComponent<components::Map>()->height - constants::kAmoutOfTilesOnScreenY/2
+                    };
+     */
+    
+    this->AddComponentFilter<components::Player>();
+}
+
+void CameraSystem::Update() {
+    if(is_active_) {
+        for (auto& e : entities_) {
+            components::Transform* target_transform = e->GetComponent<components::Transform>();
+            components::Transform* camera_transform = main_camera_->GetComponent<components::Transform>();
+            
+            camera_transform->pos_y_ = target_transform->pos_y_;
+            camera_transform->pos_x_ = target_transform->pos_x_;
+            
+            //Test for collision
+            /*
+            if (camera_transform->posX < bounds_.x)
+                camera_transform->posX = bounds_.x;
+            else if (camera_transform->posX > bounds_.width)
+                camera_transform->posX = bounds_.width;
+            
+            if(camera_transform->posY < bounds_.y)
+                camera_transform->posY = bounds_.y;
+            else if (camera_transform->posY > bounds_.height)
+                camera_transform->posY = bounds_.height;
+            */
+            CameraSystem::clip_rect_.x = camera_transform->pos_x_ - (constants::kAmoutOfTilesOnScreenX/2);
+            CameraSystem::clip_rect_.y = camera_transform->pos_y_ - (constants::kAmoutOfTilesOnScreenY/2);
+        }
+    }
+}
+
+} // Namespace systems

@@ -10,17 +10,19 @@
 #define MapCollisionSystem_hpp
 
 #include "../ECS/ECS.hpp"
-#include "../Components/Component_Map.hpp"
+#include "../Components/components.hpp"
 
-class MapCollisionSystem : public ECS::System
-{
-    public :
+namespace systems {
+class MapCollisionSystem : public ECS::UpdateSystem, public  ECS::InitSystem {
+  public :
     MapCollisionSystem(ECS::Entity * map);
+    
+    void Init();
     void Update();
     
-    private :
-    Component_Map * map;
+  private :
+    components::Map* map;
     
 };
-
+} // Namespace systems
 #endif /* MapCollisionSystem_hpp */

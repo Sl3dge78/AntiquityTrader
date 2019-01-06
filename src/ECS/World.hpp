@@ -13,49 +13,50 @@
 
 #include "Entity.hpp"
 #include "Component.hpp"
-#include "System.hpp"
+#include "ISystem.hpp"
 
 namespace ECS
 {
 
-    class World {
-    public:
-        World();
-        ~World();
-        
-        //Static Init
-        //static void Init();
-        
-        //Loop
-        void Update();
-        
-        //Entities
-        static int getEntityID();
-        
-        //TODO : CHANGE SYNTAX TO CREATE
-        Entity * AddEntity();
-        void DeleteAllEntities();
-        
-        //Systems
-        template <class T, class...Args>
-        T * AddSystem(Args&&...args);
-        void DeleteAllSystems();
+class World {
+  public:
+    World() = default;
+    ~World();
+    
+    //Entities
+    Entity* CreateEntity();
+    void    DeleteAllEntities();
+    
+    //Systems
+    template <class T, class...Args> T* CreateSystem(Args&&...args);
+    void                                DeleteAllSystems();
+    
+    void Init();
+    void Input(ALLEGRO_EVENT* const ev);
+    void Update();
+    void Draw();
+    
+    void UpdateSystemsEntities();
 
-    private:
-        std::vector<Entity *> entityList;
-        std::vector<System *> systemsList;
-        
-        //static int ENTITYID;
-        
-    };
+  private:
+    std::vector<Entity*> entity_list;
+    
+    //Systems
+    ISystem* AddSystem(ISystem* sys);
+    std::vector<ISystem*> systems_;
+    std::vector<InitSystem*> init_systems_;
+    std::vector<InputSystem*> input_systems_;
+    std::vector<UpdateSystem*> update_systems_;
+    std::vector<DrawSystem*> draw_systems_;
+    
+    bool is_systems_entities_list_dirty_ = false;
+    
+};
 
-    //SYSTEMS
-    template <class T, class...Args>
-    T * World::AddSystem(Args&&...args){
-        T * sys = new T{std::forward<Args>(args)...};
-        systemsList.push_back(sys);
-        return sys;
-    }
+//SYSTEMS
+template <class T, class...Args> T* World::CreateSystem(Args&&...args) {
+    return static_cast<T*>(AddSystem(new T(std::forward<Args>(args)...)));
+}
 
 }
 #endif /* World_hpp */

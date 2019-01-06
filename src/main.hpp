@@ -13,7 +13,6 @@
 #include <stdexcept>
 
 #include "DebugTools.hpp"
-#include "Core.hpp"
-
+#include "core.hpp"
 
 #endif /* main_h */

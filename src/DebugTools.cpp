@@ -12,10 +12,8 @@ std::string GetCurrentTimeString()
 {
     //Get time
     time_t now = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-    //struct tm td = {};
     
-    //localtime_s(&td, &now);
-    //2018-12-12 - 18:52:52 = 22chars
+    //YYYY-MM-DD - HH:MM:SS = 22chars
     char time[22];
     
     std::strftime(time, 22, "%F - %T", std::localtime(&now));
