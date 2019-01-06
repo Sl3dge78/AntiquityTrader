@@ -101,16 +101,30 @@ void World::Draw() {
 }
     
 void World::UpdateSystemsEntities() {
-     // TODO : Call this only when needed
-    if(is_systems_entities_list_dirty_){
-        for (auto& system : systems_) {
-            if (system->filter_ != -1) {
+
+    if(is_systems_entities_list_dirty_) {
+        for (auto& system : systems_) { // for each system
+            if (system->filter_.size() > 0) {
                 system->entities_.clear();
-                for (auto& entity : entity_list) {
-                    if(entity->HasComponent(system->filter_)) {
-                        system->entities_.push_back(entity);
+                
+                for (auto& entity : entity_list) { // Compare each entity to the filter list
+                    bool add = false;
+                    for (auto& id : system->filter_) {
+                        if(!entity->HasComponent(id)) {
+                            if(system->filter_type_ == FILTER_AND){
+                                add = false;
+                                break;
+                            }
+                        } else {
+                            add = true;
+                            if(system->filter_type_ == FILTER_OR)
+                                break;
+                        }
                     }
+                    if(add)
+                        system->entities_.push_front(entity);
                 }
+                system->OnEntityListChanged();
             }
         }
     }

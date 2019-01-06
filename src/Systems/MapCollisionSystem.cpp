@@ -10,23 +10,31 @@
 
 namespace systems {
 
-MapCollisionSystem::MapCollisionSystem(ECS::Entity *map) { 
-    this->map = map->GetComponent<components::Map>();
+MapCollisionSystem::MapCollisionSystem() {
+    this->AddComponentFilter<components::Collider>();
+    this->AddComponentFilter<components::Map>();
+    this->filter_type_ = ECS::FILTER_OR;
 }
 
-void MapCollisionSystem::Init(){
-    this->AddComponentFilter<components::Collider>();
+void MapCollisionSystem::OnEntityListChanged() {
+    for(auto& e : entities_) {
+        if (e->HasComponent<components::Map>()) {
+            map_ = e->GetComponent<components::Map>();
+            entities_.remove(e);
+            break;
+        }
+    }
 }
-    
+
 void MapCollisionSystem::Update()
 {
-    for(auto && e : entities_)
-    {
-        auto col = e->GetComponent<components::Collider>();
-        auto transform = e->GetComponent<components::Transform>();
-        
-        col->below_tile_ = map->map[transform->pos_y_ * map->width_ + transform->pos_x_];
-        
+    for(auto& e : entities_) {
+        if (e->HasComponent<components::Collider>()) {
+            auto col = e->GetComponent<components::Collider>();
+            auto transform = e->GetComponent<components::Transform>();
+            
+            col->below_tile_ = map_->map[transform->pos_y_ * map_->width_ + transform->pos_x_];
+        }
     }
     
 }

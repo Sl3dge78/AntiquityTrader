@@ -22,8 +22,6 @@ namespace systems {
 
 class PlayerSystem : public ECS::InputSystem, public ECS::WorldSetSystem, public ECS::InitSystem {
   public :
-    PlayerSystem() = default;
-    ~PlayerSystem() = default;
     void Init();
     void Input(ALLEGRO_EVENT* const ev);
     

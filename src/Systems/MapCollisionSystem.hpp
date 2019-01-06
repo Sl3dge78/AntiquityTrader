@@ -13,15 +13,17 @@
 #include "../Components/components.hpp"
 
 namespace systems {
-class MapCollisionSystem : public ECS::UpdateSystem, public  ECS::InitSystem {
+class MapCollisionSystem : public ECS::UpdateSystem {
   public :
-    MapCollisionSystem(ECS::Entity * map);
+    MapCollisionSystem();
+    
+    void OnEntityListChanged();
     
     void Init();
     void Update();
     
   private :
-    components::Map* map;
+    components::Map* map_;
     
 };
 } // Namespace systems

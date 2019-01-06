@@ -9,7 +9,7 @@
 #include "PlayerSystem.hpp"
 
 namespace systems {
-
+    
 void PlayerSystem::Init() {
     player_ = world_->CreateEntity();
     player_->AddComponent<components::Transform>(225,45);
@@ -55,6 +55,7 @@ void PlayerSystem::Input(ALLEGRO_EVENT* const ev) {
                     break;
             }
         }
+            
     }
 }
 
@@ -63,7 +64,6 @@ void PlayerSystem::Interact() {
     //Town interaction
     if(player_->GetComponent<components::Collider>()->below_tile_ == components::TILE_TOWN)
     {
-        std::cout << "Zradabaldjan";
         //TODO
         if(!isInTown)
         {

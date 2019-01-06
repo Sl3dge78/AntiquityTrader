@@ -103,16 +103,16 @@
 				8A3B2ADB21C73B8800F98D76 /* ECS */,
 				8AF739D021CFE9060035E2AD /* Components */,
 				8A8BF05721CB132F002FD5EA /* Systems */,
-				8A3B2AC721C73B7F00F98D76 /* core.hpp */,
 				8A3B2AD321C73B8100F98D76 /* core.cpp */,
-				8A3B2ACB21C73B8000F98D76 /* constants.hpp */,
+				8A3B2AC721C73B7F00F98D76 /* core.hpp */,
 				8AC8139121E231F40090D7B2 /* constants.cpp */,
-				8A8BF05521CAE7BD002FD5EA /* DebugTools.hpp */,
+				8A3B2ACB21C73B8000F98D76 /* constants.hpp */,
 				8A8BF05421CAE7BD002FD5EA /* DebugTools.cpp */,
-				8AF739CE21CFE0690035E2AD /* Rect.hpp */,
+				8A8BF05521CAE7BD002FD5EA /* DebugTools.hpp */,
 				8AF739CD21CFE0690035E2AD /* Rect.cpp */,
-				8A3B2ADC21C73C2F00F98D76 /* main.hpp */,
+				8AF739CE21CFE0690035E2AD /* Rect.hpp */,
 				8A815BAC21C7372A008FB94F /* main.cpp */,
+				8A3B2ADC21C73C2F00F98D76 /* main.hpp */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -166,16 +166,16 @@
 			isa = PBXGroup;
 			children = (
 				8AC8139421E25D120090D7B2 /* systems.hpp */,
-				8A8BF04921C855B9002FD5EA /* RenderingSystems.hpp */,
 				8A8BF04821C855B9002FD5EA /* RenderingSystems.cpp */,
-				8A8BF05921CC305B002FD5EA /* PlayerSystem.hpp */,
+				8A8BF04921C855B9002FD5EA /* RenderingSystems.hpp */,
 				8A8BF05821CC305B002FD5EA /* PlayerSystem.cpp */,
-				8AF6F65121D659F90040D79A /* MapCollisionSystem.hpp */,
+				8A8BF05921CC305B002FD5EA /* PlayerSystem.hpp */,
 				8AF6F65021D659F90040D79A /* MapCollisionSystem.cpp */,
-				8AF6F65421D660000040D79A /* UISystem.hpp */,
+				8AF6F65121D659F90040D79A /* MapCollisionSystem.hpp */,
 				8AF6F65321D660000040D79A /* UISystem.cpp */,
-				8AF6F65721D7C8CC0040D79A /* MapSystem.hpp */,
+				8AF6F65421D660000040D79A /* UISystem.hpp */,
 				8AF6F65621D7C8CC0040D79A /* MapSystem.cpp */,
+				8AF6F65721D7C8CC0040D79A /* MapSystem.hpp */,
 			);
 			name = Systems;
 			path = src/Systems;
@@ -201,8 +201,8 @@
 		8AF739D021CFE9060035E2AD /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				8A8BF03F21C85394002FD5EA /* components.hpp */,
 				8A8BF05B21CC4941002FD5EA /* components.cpp */,
+				8A8BF03F21C85394002FD5EA /* components.hpp */,
 			);
 			name = Components;
 			path = src/Components;

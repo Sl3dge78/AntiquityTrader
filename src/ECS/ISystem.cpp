@@ -11,7 +11,7 @@ namespace ECS
 {
 
 void ISystem::AddEntity(Entity* e) {
-    entities_.push_back(e);
+    entities_.push_front(e);
     OnEntityAdded(e);
 }
 
@@ -25,7 +25,7 @@ void const ISystem::GetActiveEntities(std::vector<Entity*> *list) {
 }
     
     void ISystem::AddComponentFilter(const int id) { 
-        filter_ = id;
+        filter_.push_back(id);
     }
     
 }

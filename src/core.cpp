@@ -107,7 +107,7 @@ void Core::Start() {
     world_->CreateSystem<systems::PlayerSystem>();
     world_->CreateSystem<systems::MapSystem>(CORE_FONT);
     world_->CreateSystem<systems::CameraSystem>();
-    //world_->CreateSystem<systems::MapCollisionSystem>();
+    world_->CreateSystem<systems::MapCollisionSystem>();
     world_->Init();
 }
 

@@ -13,11 +13,14 @@
 #include <allegro5/allegro_font.h>
 
 #include <vector>
+#include <forward_list>
 #include "Entity.hpp"
 
 namespace ECS
 {
 
+enum FilterType { FILTER_AND, FILTER_OR };
+    
 class ISystem {
     friend class World;
     
@@ -29,15 +32,18 @@ class ISystem {
     const void              GetActiveEntities(std::vector<Entity*> *list);
     void                    AddEntity(Entity* e);
     template <class T> void AddComponentFilter();
+    void                    SetFilterType(FilterType type) {filter_type_ = type;};
     
   protected:
     ISystem() = default;
     bool                    is_active_ = true;
     
-    std::vector<Entity*>    entities_;
-    int                     filter_ = -1;
+    std::forward_list<Entity*>    entities_;
+    std::vector<int>        filter_;
+    FilterType              filter_type_ = FILTER_AND;
     
     virtual void            OnEntityAdded(Entity* entity) {};
+    virtual void            OnEntityListChanged() {};
 };
     
 template <class T> void ISystem::AddComponentFilter() {

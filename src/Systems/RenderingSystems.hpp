@@ -20,19 +20,16 @@
 
 namespace systems {
 
-struct ObjectRendererSystem : public ECS::DrawSystem, public ECS::InitSystem {
-    ObjectRendererSystem(ALLEGRO_FONT* font) { font_ = font; };
-    ~ObjectRendererSystem() = default;
+struct ObjectRendererSystem : public ECS::DrawSystem {
+    ObjectRendererSystem(ALLEGRO_FONT* font);
     
+    void ChangeFilters();
     void Init();
     void Draw();
 };
 
 class CameraSystem : public ECS::UpdateSystem, public ECS::InitSystem, public ECS::WorldSetSystem {
 public:
-    CameraSystem() = default;
-    ~CameraSystem() = default;
-    
     void Init();
     void Update();
     

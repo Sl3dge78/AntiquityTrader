@@ -9,7 +9,8 @@
 
 namespace systems {
     
-void ObjectRendererSystem::Init() {
+ObjectRendererSystem::ObjectRendererSystem(ALLEGRO_FONT* font) {
+    font_ = font;
     this->AddComponentFilter<components::FontRenderer>();
 }
 
