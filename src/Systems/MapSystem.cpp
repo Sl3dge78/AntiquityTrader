@@ -81,6 +81,7 @@ void MapSystem::Init() {
         
         sec = al_get_next_config_section(&it);
     }
+    al_destroy_config(townFile);
 }
 
 void MapSystem::Draw()
