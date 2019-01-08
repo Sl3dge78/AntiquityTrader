@@ -128,6 +128,10 @@ struct InventoryObject : public ECS::Component {
 struct Inventory : public ECS::Component {
     std::map<InventoryObjectType, int> inventory_;
 };
+
+struct MoneyPurse : public ECS::Component {
+    int amount_;
+};
     
 struct Town : public ECS::Component {
     Town(std::string name) : name_(name) {} ;

@@ -8,7 +8,27 @@
 
 #include "townUI.hpp"
 namespace systems {
+
+MainUI::MainUI() {
+    this->AddComponentFilter<components::Player>();
+    this->pos_z = -1;
+}
+
+void MainUI::Draw() {
+    for (auto& e : entities_) {
+        al_draw_filled_rectangle(0, 0, constants::kWindowWidth, 16, al_map_rgb(0, 0, 0));
+        std::string money_label_ = "Money: ";
+        money_label_ += std::to_string(e->GetComponent<components::MoneyPurse>()->amount_);
+        money_label_ += "$";
+        
+        al_draw_text(font_, al_map_rgb(255, 255, 255), 8, 4, ALLEGRO_ALIGN_LEFT, money_label_.c_str());
+    }
+}
     
+    /*
+     * == TOWN UI ==
+     */
+
 TownUI::TownUI() {
     this->AddComponentFilter<components::Town>();
     this->pos_z = -1;

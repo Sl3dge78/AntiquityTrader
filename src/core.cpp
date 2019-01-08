@@ -121,6 +121,7 @@ void Core::Start() {
     world_->CreateSystem<systems::Collision>();
     world_->CreateSystem<systems::PlayerSystem>();
     world_->CreateSystem<systems::TownUI>();
+    world_->CreateSystem<systems::MainUI>();
     
     world_->Init();
 }

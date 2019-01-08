@@ -19,6 +19,7 @@ void PlayerSystem::Init() {
     player_->AddComponent<TileSetRenderer>(Tile::GetVector2FromTileType(TILE_PLAYER), 0);
     player_->AddComponent<Player>();
     player_->AddComponent<Inventory>();
+    player_->AddComponent<MoneyPurse>();
 }
 
 void PlayerSystem::Input(ALLEGRO_EVENT* const ev) {
@@ -46,6 +47,11 @@ void PlayerSystem::Input(ALLEGRO_EVENT* const ev) {
                     case ALLEGRO_KEY_A:
                         movement_x = -1;
                         break;
+                        
+                    case ALLEGRO_KEY_ENTER : {
+                        auto p = player_->GetComponent<components::MoneyPurse>()->amount_ += 10;
+                        break;
+                    }
                         
                     default:
                         break;

@@ -28,6 +28,14 @@ class TownUI : public ECS::DrawSystem {
     
 };
     
+class MainUI : public ECS::DrawSystem {
+public:
+    MainUI();
+    
+    void Draw();
+    
+};
+    
 }
 
 #endif /* townUI_hpp */
