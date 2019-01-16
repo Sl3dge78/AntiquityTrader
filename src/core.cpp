@@ -100,7 +100,7 @@ void Core::GameLoop() {
 		
 		if (redraw_ && al_is_event_queue_empty(event_queue_))
 		{
-			Draw();
+            Draw();
 		}
 	}
 }
@@ -122,6 +122,7 @@ void Core::Start() {
     world_->CreateSystem<systems::PlayerSystem>();
     world_->CreateSystem<systems::TownUI>();
     world_->CreateSystem<systems::MainUI>();
+    world_->CreateSystem<systems::MapCollisionSystem>();
     
     world_->Init();
 }

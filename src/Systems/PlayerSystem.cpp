@@ -14,7 +14,8 @@ void PlayerSystem::Init() {
     using namespace components;
     
     player_ = world_->CreateEntity();
-    player_->AddComponent<Transform>(225,45);
+    player_->AddComponent<Transform>(220,45);
+    player_->AddComponent<Rigidbody>();
     player_->AddComponent<Collider>(COLLIDER_FLAG_PLAYER);
     player_->AddComponent<TileSetRenderer>(Tile::GetVector2FromTileType(TILE_PLAYER), 0);
     player_->AddComponent<Player>();
@@ -25,38 +26,46 @@ void PlayerSystem::Init() {
 void PlayerSystem::Input(ALLEGRO_EVENT* const ev) {
     if(is_active_)
     {
-        components::Transform* transform = player_->GetComponent<components::Transform>();
+        components::Rigidbody* rigidbody = player_->GetComponent<components::Rigidbody>();
         
         if (ev->type == ALLEGRO_EVENT_KEY_CHAR)
         {
             if(!player_->GetComponent<components::Player>()->is_in_town_) {
-                int movement_x = 0, movement_y = 0;
+                Vector2 movement;
                 switch (ev->keyboard.keycode) {
                     case ALLEGRO_KEY_W:
-                        movement_y = -1;
+                        movement.y = -1;
                         break;
                         
                     case ALLEGRO_KEY_S:
-                        movement_y = 1;
+                        movement.y = 1;
                         break;
                         
                     case ALLEGRO_KEY_D:
-                        movement_x = 1;
+                        movement.x = 1;
                         break;
                         
                     case ALLEGRO_KEY_A:
-                        movement_x = -1;
+                        movement.x = -1;
                         break;
                         
                     case ALLEGRO_KEY_ENTER : {
-                        auto p = player_->GetComponent<components::MoneyPurse>()->amount_ += 10;
+                        player_->GetComponent<components::MoneyPurse>()->amount_ += 10;
                         break;
                     }
-                        
+                    
+                    case ALLEGRO_KEY_SPACE : {
+                        int* p = &(player_->GetComponent<components::MoneyPurse>()->amount_);
+                        *p -= 10;
+                        if (*p < 0) {
+                            *p = 0;
+                        }
+                        break;
+                    }
                     default:
                         break;
                 }
-                transform->Translate(movement_x, movement_y);
+                rigidbody->Move(movement);
             }
         } else if (ev->type == ALLEGRO_EVENT_KEY_DOWN)
         {

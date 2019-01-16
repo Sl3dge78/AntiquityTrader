@@ -14,7 +14,7 @@
 
 namespace systems {
     
-class Collision : public ECS::UpdateSystem {
+class Collision : public ECS::ISystem, public ECS::UpdateSystem {
   public :
     Collision();
     void Update();

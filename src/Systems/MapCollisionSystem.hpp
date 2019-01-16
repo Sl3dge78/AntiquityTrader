@@ -13,7 +13,7 @@
 #include "../Components/components.hpp"
 
 namespace systems {
-class MapCollisionSystem : public ECS::UpdateSystem {
+class MapCollisionSystem : public ECS::ISystem, public ECS::UpdateSystem {
   public :
     MapCollisionSystem();
     

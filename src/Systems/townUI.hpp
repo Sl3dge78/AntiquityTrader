@@ -9,6 +9,9 @@
 #ifndef townUI_hpp
 #define townUI_hpp
 
+#include <iostream>
+#include <sstream>
+
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_font.h>
@@ -20,15 +23,20 @@
 
 namespace systems {
     
-class TownUI : public ECS::DrawSystem {
+class TownUI : public ECS::ISystem, public ECS::DrawSystem, public ECS::InputSystem {
   public:
     TownUI();
     
     void Draw();
+    void Input(ALLEGRO_EVENT* const ev);
+    
+  private:
+    int selection_ = 0;
+    components::InventoryObjectType current_selected_object_;
     
 };
     
-class MainUI : public ECS::DrawSystem {
+class MainUI : public ECS::ISystem, public ECS::DrawSystem {
 public:
     MainUI();
     

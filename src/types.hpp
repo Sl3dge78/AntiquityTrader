@@ -10,7 +10,10 @@
 #define types_hpp
 
 struct Vector2 {
-    int x, y;
+    int x = 0, y = 0;
+    
+    Vector2* operator += (const Vector2& sum)   { this->x += sum.x; this->y += sum.y; return this; }
+    Vector2  operator +  (const Vector2& sum)   { return Vector2 { this->x + sum.x, this->y + sum.y }; }
 };
 
 struct Rect {

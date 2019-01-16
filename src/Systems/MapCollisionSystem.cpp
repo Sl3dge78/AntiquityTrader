@@ -11,7 +11,7 @@
 namespace systems {
 
 MapCollisionSystem::MapCollisionSystem() {
-    this->AddComponentFilter<components::Collider>();
+    this->AddComponentFilter<components::Rigidbody>();
     this->AddComponentFilter<components::Map>();
     this->filter_type_ = ECS::FILTER_OR;
 }
@@ -27,13 +27,17 @@ void MapCollisionSystem::OnEntityListChanged() {
 
 void MapCollisionSystem::Update()
 {
-    /*
     for(auto& e : entities_) {
-        auto col = e->GetComponent<components::Collider>();
         auto transform = e->GetComponent<components::Transform>();
-        
-        col->below_tile_ = map_->map[transform->pos_y_ * map_->width_ + transform->pos_x_];
+        auto rigidbody = e->GetComponent<components::Rigidbody>();
+        if (rigidbody->GetCollisionCheck()) {
+            Vector2 sum = transform->GetPosition() + rigidbody->GetMovement();
+            components::TileType tile = map_->GetTileAtPosition(sum);
+            if (tile != components::TILE_LAND && tile != components::TILE_COAST) {
+                transform->Translate(rigidbody->GetMovement());
+            }
+            rigidbody->MovementDone();
+        }
     }
-    */
 }
 } // Namespace systems

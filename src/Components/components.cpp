@@ -12,10 +12,15 @@ namespace components {
 
 void Transform::Translate(int amt_x, int amt_y) {
     
-    pos_x_ += amt_x;
-    pos_y_ += amt_y;
-    do_collision_check = true;
+    position_.x += amt_x;
+    position_.y += amt_y;
+    has_moved_ = true;
+}
     
+void Transform::Translate(Vector2 amount) {
+    
+    position_ += amount;
+    has_moved_ = true;
 }
 
 } // Namespace components

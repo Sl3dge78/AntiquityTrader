@@ -43,20 +43,22 @@ struct TileSetRenderer : public ECS::Component {
 
 struct Transform : public ECS::Component {
   public:
-    Transform(const int posX = 0, const int posY = 0) :
-    pos_x_(posX),
-    pos_y_(posY)
-    {
+    Transform(const int posX = 0, const int posY = 0) {
+        position_.x = posX;
+        position_.y = posY;
         parent_ = nullptr;
     };
     ~Transform() = default;
     
     // Positions
-    bool do_collision_check = true;
-    void Translate(int amt_x, int amt_y);
-    int GetPosX() const { return pos_x_; };
-    int GetPosY() const { return pos_y_; };
-    int GetPositionID() const { return (pos_x_ + (pos_y_ * 500)); };
+    bool    has_moved_ = true;
+    void    Translate(Vector2 amount);
+    void    Translate(int amt_x, int amt_y);
+    
+    Vector2 GetPosition()   const { return position_; }
+    int     GetPosX()       const { return position_.x; };
+    int     GetPosY()       const { return position_.y; };
+    int     GetPositionID() const { return (position_.x + (position_.y * constants::kMapWidth)); };
     
     //Children management
     void                        SetParent(ECS::Entity* parent);
@@ -66,11 +68,23 @@ struct Transform : public ECS::Component {
     void                        RemoveAllChildren();
     
   protected:
-    int pos_x_;
-    int pos_y_;
+    Vector2 position_;
     
     ECS::Entity* parent_;
     std::vector<ECS::Entity*> childs_;
+};
+    
+struct Rigidbody : public ECS::Component {
+  public :
+    void    Move (Vector2 amount) { movement_ = amount; do_collision_check_ = true; }
+    Vector2 GetMovement() { return movement_; }
+    void    MovementDone() { movement_.x = 0; movement_.y = 0; do_collision_check_ = false; }
+    bool    GetCollisionCheck() { return do_collision_check_; }
+    
+  private:
+    Vector2 movement_;
+    bool    do_collision_check_;
+    
 };
 
     
@@ -107,11 +121,12 @@ struct Map : public ECS::Component {
   public :
     Map() = default;
     ~Map() { delete [] map; }
+    TileType GetTileAtPosition (Vector2 const position) { return map[position.y * width_ + position.x]; }
     
     int             width_;
     int             height_;
     TileType*       map = NULL;
-    ALLEGRO_FONT *  font;
+    ALLEGRO_FONT*   font;
 };
 
 /*
@@ -120,9 +135,18 @@ struct Map : public ECS::Component {
 
 enum InventoryObjectType { INV_OBJECT_CHOUX, INV_OBJECT_FLEUR };
     
-struct InventoryObject : public ECS::Component {
+class InventoryObject : public ECS::Component {
+  public :
+    InventoryObject(InventoryObjectType type, std::string name, int price) : type_(type), name_(name), price_(price) {};
     InventoryObjectType type_;
     std::string name_;
+    int price_;
+    
+};
+
+const InventoryObject kInventoryObjectList[] = {
+    {INV_OBJECT_CHOUX, "Choux", 100},
+    {INV_OBJECT_FLEUR, "Fleur", 150}
 };
     
 struct Inventory : public ECS::Component {

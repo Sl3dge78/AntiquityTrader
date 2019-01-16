@@ -20,7 +20,7 @@
 
 namespace systems {
 
-struct ObjectRendererSystem : public ECS::DrawSystem {
+struct ObjectRendererSystem : public ECS::ISystem, public ECS::DrawSystem {
     ObjectRendererSystem();
     
     void ChangeFilters();
@@ -29,7 +29,7 @@ struct ObjectRendererSystem : public ECS::DrawSystem {
     void Draw();
 };
 
-class CameraSystem : public ECS::UpdateSystem, public ECS::InitSystem, public ECS::WorldSetSystem {
+class CameraSystem : public ECS::ISystem, public ECS::UpdateSystem, public ECS::InitSystem, public ECS::WorldSetSystem {
 public:
     void Init();
     void Update();

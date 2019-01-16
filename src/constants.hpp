@@ -24,6 +24,9 @@ extern const int       kAmoutOfTilesOnScreenY;
 
 extern const char*     kMapFile;
 extern const char*     kTownFile;
+
+static int                    kMapWidth;
+static int                    kMapHeight;
     
 }
 

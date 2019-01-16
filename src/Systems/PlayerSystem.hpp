@@ -20,7 +20,7 @@
 
 namespace systems {
 
-class PlayerSystem : public ECS::InputSystem, public ECS::WorldSetSystem, public ECS::InitSystem {
+class PlayerSystem : public ECS::ISystem, public ECS::InputSystem, public ECS::WorldSetSystem, public ECS::InitSystem {
   public :
     void Init();
     void Input(ALLEGRO_EVENT* const ev);

@@ -34,6 +34,8 @@ void MapSystem::Init() {
     getline (file,lines);
     mapComponent->width_ = std::stoi(rows);
     mapComponent->height_ = std::stoi(lines);
+    constants::kMapWidth = mapComponent->width_;
+    constants::kMapHeight = mapComponent->height_;
     
     // Reads the contents of the map file ommiting \n
     mapComponent->map = new TileType[mapComponent->width_ * mapComponent->height_];

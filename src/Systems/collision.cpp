@@ -21,7 +21,7 @@ void Collision::Update() {
     
     std::forward_list<ECS::Entity*> test_list;
     for (auto& e : entities_) {
-        if (e->GetComponent<components::Transform>()->do_collision_check)
+        if (e->GetComponent<components::Transform>()->has_moved_)
             test_list.push_front(e);
     }
     

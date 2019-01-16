@@ -53,8 +53,7 @@ template <class T> void ISystem::AddComponentFilter() {
 // == CHILDS ==
 
 /// Update gets called every frame
-class UpdateSystem : public ISystem
-{
+class UpdateSystem {
   protected :
     UpdateSystem() = default;
     
@@ -64,8 +63,7 @@ class UpdateSystem : public ISystem
 };
 
 /// Draw gets called every frame after all logic
-class DrawSystem : public ISystem
-{
+class DrawSystem {
     friend class World;
     
   protected :
@@ -80,8 +78,7 @@ class DrawSystem : public ISystem
 };
 
 /// Input gets called when an event gets registered
-class InputSystem : public ISystem
-{
+class InputSystem {
   protected:
     InputSystem() = default;
     

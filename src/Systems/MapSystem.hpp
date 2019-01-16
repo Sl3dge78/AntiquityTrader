@@ -21,7 +21,7 @@
 #include "RenderingSystems.hpp"
 
 namespace systems {
-class MapSystem : public ECS::DrawSystem, public ECS::WorldSetSystem, public ECS::InitSystem {
+class MapSystem : public ECS::ISystem, public ECS::DrawSystem, public ECS::WorldSetSystem, public ECS::InitSystem {
   public:
     
     void Init();
