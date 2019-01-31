@@ -17,8 +17,8 @@ struct Vector2 {
 };
 
 struct Rect {
-    int x, y;
-    int width, height;
+    int x = 0, y = 0;
+    int width = 0, height = 0;
 
 };
 

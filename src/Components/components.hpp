@@ -151,10 +151,10 @@ const InventoryObject kInventoryObjectList[] = {
     
 struct Inventory : public ECS::Component {
     std::map<InventoryObjectType, int> inventory_;
-};
-
-struct MoneyPurse : public ECS::Component {
-    int amount_;
+    int money_ = 0;
+    bool is_dirty_ = false;
+    
+    void AddMoney (int amount) {this->money_ += amount; this->is_dirty_ = true;}
 };
     
 struct Town : public ECS::Component {
@@ -167,6 +167,7 @@ struct Town : public ECS::Component {
 struct Player : public ECS::Component {
     bool is_in_town_ = false;
     Town* current_town_;
+    Inventory* inventory_;
 };
     
 /*
@@ -175,13 +176,30 @@ struct Player : public ECS::Component {
 struct UIElement : public ECS::Component {
     Rect            rect_;
     ALLEGRO_COLOR   color_ = (ALLEGRO_COLOR){.r = 1, .g = 1, .b = 1, .a = 1};
+    
+    virtual ALLEGRO_COLOR   GetColor() const { return color_; }
+};
+    
+struct UISelectable : public UIElement { // UI Input handler will move focus to item in direction pressed.
+    bool            has_focus = false; // Whether to handle events or not
+    ALLEGRO_COLOR   focused_color_ = (ALLEGRO_COLOR){.r = 1, .g = 1, .b = 1, .a = 1};
+    
+    ECS::Entity*    above_;
+    ECS::Entity*    below_;
+    ECS::Entity*    left_;
+    ECS::Entity*    right_;
+    
+    ALLEGRO_COLOR   GetColor() const { if (has_focus) return focused_color_; else return color_; }
+    std::function<void()> callback_;
 };
 
 struct UIPanel : public UIElement {};
 
+    // TODO: Automanaged dynamic text
 struct UIText : public UIElement {
     std::string text_;
 };
+    
     
 } // Namespace
 #endif /* Components_hpp */

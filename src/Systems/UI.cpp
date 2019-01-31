@@ -6,32 +6,90 @@
 //  Copyright © 2019 Sledge. All rights reserved.
 //
 
-#include "townUI.hpp"
+#include "UI.hpp"
 namespace systems {
 
-MainUI::MainUI() {
-    this->AddComponentFilter<components::Player>();
-    this->pos_z = -1;
+UIDraw::UIDraw() {
+    this->AddComponentFilter<components::UIText>();
+    this->AddComponentFilter<components::UIPanel>();
+    this->SetFilterType(ECS::FILTER_OR);
+    this->pos_z = -5;
 }
 
-void MainUI::Draw() {
+void UIDraw::Draw() {
     for (auto& e : entities_) {
-        al_draw_filled_rectangle(0, 0, constants::kWindowWidth, 16, al_map_rgb(0, 0, 0));
-        std::stringstream money_label_;
-        money_label_ << "Money: " << std::to_string(e->GetComponent<components::MoneyPurse>()->amount_) << "$";
-        
-        al_draw_text(font_, al_map_rgb(255, 255, 255), 8, 4, ALLEGRO_ALIGN_LEFT, money_label_.str().c_str());
-        
-        std::stringstream inventory_label;
-        inventory_label << "Inventory: " << components::kInventoryObjectList[0].name_ << ":" << e->GetComponent<components::Inventory>()->inventory_[components::kInventoryObjectList[0].type_] << "\0";
-        al_draw_text(font_, al_map_rgb(255, 255, 255), constants::kWindowWidth/2, 4, ALLEGRO_ALIGN_LEFT, inventory_label.str().c_str());
+        if (e->GetIsActive()) {
+            if (e->HasComponent<components::UIPanel>()) {
+                auto comp = e->GetComponent<components::UIPanel>();
+                ALLEGRO_COLOR color;
+                if (e->HasComponent<components::UISelectable>() && e->GetComponent<components::UISelectable>()->has_focus) {
+                    color = e->GetComponent<components::UISelectable>()->focused_color_;
+                } else color = comp->color_;
+                
+                al_draw_filled_rectangle(comp->rect_.x, comp->rect_.y, comp->rect_.width, comp->rect_.height, comp->GetColor());
+            }
+            
+            if (e->HasComponent<components::UIText>()) {
+                auto comp = e->GetComponent<components::UIText>();
+                al_draw_text(font_, comp->GetColor(), comp->rect_.x, comp->rect_.y, ALLEGRO_ALIGN_LEFT, comp->text_.c_str());
+            }
+        }
     }
 }
+    
+UIInput::UIInput() {
+    this->AddComponentFilter<components::UISelectable>();
+}
+    
+void UIInput::Input(ALLEGRO_EVENT *const ev) {
+    for (auto& e : entities_) {
+        auto comp = e->GetComponent<components::UISelectable>();
+        if (e->GetIsActive() && comp->has_focus){
+            switch (ev->keyboard.keycode) {
+                case ALLEGRO_KEY_W:
+                    if (comp->above_) {
+                        comp->has_focus = false;
+                        comp->above_->GetComponent<components::UISelectable>()->has_focus = true;
+                    }
+                    break;
+                    
+                case ALLEGRO_KEY_S:
+                    if (comp->below_) {
+                        comp->has_focus = false;
+                        comp->below_->GetComponent<components::UISelectable>()->has_focus = true;
+                    }
+                    break;
+                
+                case ALLEGRO_KEY_Q:
+                    if (comp->left_) {
+                        comp->has_focus = false;
+                        comp->left_->GetComponent<components::UISelectable>()->has_focus = true;
+                    }
+                    break;
+                    
+                case ALLEGRO_KEY_D:
+                    if (comp->right_) {
+                        comp->has_focus = false;
+                        comp->right_->GetComponent<components::UISelectable>()->has_focus = true;
+                    }
+                    break;
+                    
+                case ALLEGRO_KEY_E:
+                case ALLEGRO_KEY_ENTER:
+                    if (comp->callback_)
+                        comp->callback_(); //TODO: test this
+                    break;
+            }
+        }
+    }
+}
+
+//TODO : adapt below code to new architecture
     
     /*
      * == TOWN UI ==
      */
-
+/*
 TownUI::TownUI() {
     this->AddComponentFilter<components::Town>();
     this->pos_z = -1;
@@ -64,7 +122,7 @@ void TownUI::Input(ALLEGRO_EVENT* const ev) {
     }
 }
 
-// TODO : DIS IS DIRTY CLEAN IT UP !!!!
+
 void TownUI::Draw() {
     for (auto& e : entities_) {
         if(e->GetComponent<components::Town>()->is_player_in_) {
@@ -101,4 +159,5 @@ void TownUI::Draw() {
         }
     }
 }
+ */
 }// Namespace systems

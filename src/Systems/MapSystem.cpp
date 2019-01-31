@@ -86,8 +86,7 @@ void MapSystem::Init() {
     al_destroy_config(townFile);
 }
 
-void MapSystem::Draw()
-{
+void MapSystem::Draw() {
     Rect clipRect = CameraSystem::GetClipRect();
     
     auto map = map_entity_->GetComponent<components::Map>();
@@ -134,7 +133,7 @@ void MapSystem::Draw()
                                   x_map_position * constants::kTileWidth,
                                   y_map_position * constants::kTileHeight,
                                   0);
-            /*
+            
             //Tile tile = TILES_LIST[map->map[id]];
              al_draw_text(font_,
                          tile.color_,

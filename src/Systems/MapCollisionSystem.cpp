@@ -25,8 +25,7 @@ void MapCollisionSystem::OnEntityListChanged() {
     }
 }
 
-void MapCollisionSystem::Update()
-{
+void MapCollisionSystem::Update() {
     for(auto& e : entities_) {
         auto transform = e->GetComponent<components::Transform>();
         auto rigidbody = e->GetComponent<components::Rigidbody>();
@@ -40,4 +39,5 @@ void MapCollisionSystem::Update()
         }
     }
 }
+
 } // Namespace systems

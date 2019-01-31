@@ -10,7 +10,7 @@
 		8A29BF3221E2AF790062D8C2 /* liballegro_image.5.2.4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A29BF3021E2AF600062D8C2 /* liballegro_image.5.2.4.dylib */; };
 		8A3B2ADA21C73B8100F98D76 /* core.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A3B2AD321C73B8100F98D76 /* core.cpp */; };
 		8A3B2AFA21C8331C00F98D76 /* liballegro.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A3B2AF921C8331C00F98D76 /* liballegro.dylib */; };
-		8A629D2221E27C1F00AC31D0 /* townUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A629D2021E27C1F00AC31D0 /* townUI.cpp */; };
+		8A629D2221E27C1F00AC31D0 /* UI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A629D2021E27C1F00AC31D0 /* UI.cpp */; };
 		8A629D2521E280C600AC31D0 /* collision.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A629D2321E280C600AC31D0 /* collision.cpp */; };
 		8A815BAD21C7372A008FB94F /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A815BAC21C7372A008FB94F /* main.cpp */; };
 		8A8BF03421C8336D002FD5EA /* liballegro_font.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A8BF03321C8336D002FD5EA /* liballegro_font.dylib */; };
@@ -49,8 +49,8 @@
 		8A3B2AD321C73B8100F98D76 /* core.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = core.cpp; path = src/core.cpp; sourceTree = SOURCE_ROOT; };
 		8A3B2ADC21C73C2F00F98D76 /* main.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = main.hpp; path = src/main.hpp; sourceTree = SOURCE_ROOT; };
 		8A3B2AF921C8331C00F98D76 /* liballegro.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = liballegro.dylib; path = ../../../../../../usr/local/lib/liballegro.dylib; sourceTree = "<group>"; };
-		8A629D2021E27C1F00AC31D0 /* townUI.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = townUI.cpp; sourceTree = "<group>"; };
-		8A629D2121E27C1F00AC31D0 /* townUI.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = townUI.hpp; sourceTree = "<group>"; };
+		8A629D2021E27C1F00AC31D0 /* UI.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UI.cpp; sourceTree = "<group>"; };
+		8A629D2121E27C1F00AC31D0 /* UI.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UI.hpp; sourceTree = "<group>"; };
 		8A629D2321E280C600AC31D0 /* collision.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = collision.cpp; sourceTree = "<group>"; };
 		8A629D2421E280C600AC31D0 /* collision.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = collision.hpp; sourceTree = "<group>"; };
 		8A815BA921C7372A008FB94F /* AntiquityTrader */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = AntiquityTrader; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -179,8 +179,8 @@
 				8AF6F65121D659F90040D79A /* MapCollisionSystem.hpp */,
 				8AF6F65621D7C8CC0040D79A /* MapSystem.cpp */,
 				8AF6F65721D7C8CC0040D79A /* MapSystem.hpp */,
-				8A629D2021E27C1F00AC31D0 /* townUI.cpp */,
-				8A629D2121E27C1F00AC31D0 /* townUI.hpp */,
+				8A629D2021E27C1F00AC31D0 /* UI.cpp */,
+				8A629D2121E27C1F00AC31D0 /* UI.hpp */,
 				8A629D2321E280C600AC31D0 /* collision.cpp */,
 				8A629D2421E280C600AC31D0 /* collision.hpp */,
 			);
@@ -280,7 +280,7 @@
 				8AF6F65221D659F90040D79A /* MapCollisionSystem.cpp in Sources */,
 				8A8BF04321C85409002FD5EA /* Entity.cpp in Sources */,
 				8A815BAD21C7372A008FB94F /* main.cpp in Sources */,
-				8A629D2221E27C1F00AC31D0 /* townUI.cpp in Sources */,
+				8A629D2221E27C1F00AC31D0 /* UI.cpp in Sources */,
 				8A629D2521E280C600AC31D0 /* collision.cpp in Sources */,
 				8AF6F65821D7C8CC0040D79A /* MapSystem.cpp in Sources */,
 				8AC8139221E231F40090D7B2 /* constants.cpp in Sources */,

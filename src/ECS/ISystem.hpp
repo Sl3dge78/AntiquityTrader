@@ -113,8 +113,6 @@ class WorldSetSystem
   public:
     virtual ~WorldSetSystem() = default;
 };
-
-
     
 } // Namespace
 #endif /* System_hpp */

@@ -120,8 +120,10 @@ void Core::Start() {
     world_->CreateSystem<systems::CameraSystem>();
     world_->CreateSystem<systems::Collision>();
     world_->CreateSystem<systems::PlayerSystem>();
-    world_->CreateSystem<systems::TownUI>();
-    world_->CreateSystem<systems::MainUI>();
+    //world_->CreateSystem<systems::TownUI>();
+    //world_->CreateSystem<systems::MainUI>();
+    world_->CreateSystem<systems::UIDraw>();
+    world_->CreateSystem<systems::UIInput>();
     world_->CreateSystem<systems::MapCollisionSystem>();
     
     world_->Init();
@@ -145,7 +147,7 @@ void Core::Update() {
 		redraw_ = true;
 		break;
 
-	default: // We caught an unknown type of event, we delegate its handling to the input systems
+	default: // We caught an unknown type of event, we delegate its handling to the UI then the input systems
         world_->Input(& ev);
 		break;
 
