@@ -14,7 +14,7 @@ ObjectRendererSystem::ObjectRendererSystem() {
     this->pos_z = 0;
 }
 
-void ObjectRendererSystem::OnEntityAdded(ECS::Entity* entity) {
+void ObjectRendererSystem::OnEntityListChanged() {
 
     entities_.sort([](const ECS::Entity* e1, const ECS::Entity* e2)
                    {

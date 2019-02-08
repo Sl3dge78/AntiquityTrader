@@ -20,7 +20,7 @@ World::~World() {
 
 Entity* World::CreateEntity() {
     Entity* e = new Entity();
-    entity_list.push_back(e);
+    entity_list_.push_back(e);
     
     is_systems_entities_list_dirty_ = true;
     
@@ -28,13 +28,28 @@ Entity* World::CreateEntity() {
 }
 
 void World::DeleteAllEntities() {
-    for(Entity* e : entity_list) {
+    for(Entity* e : entity_list_) {
         delete e;
     }
     
     is_systems_entities_list_dirty_ = true;
     
-    entity_list.clear();
+    entity_list_.clear();
+}
+    
+void World::DeleteEntity(ECS::Entity* e) {
+    for (auto it = entity_list_.begin(); it < entity_list_.end(); ++it) {
+        if (*it == e) {
+            for (auto child : e->GetChildren()) {
+                this->DeleteEntity(child);
+            }
+            delete e;
+            entity_list_.erase(it);
+            is_systems_entities_list_dirty_ = true;
+            return;
+        }
+    }
+    
 }
 
 // == SYSTEMS ==
@@ -113,9 +128,12 @@ void World::UpdateSystemsEntities() {
     if(is_systems_entities_list_dirty_) {
         for (auto& system : systems_) { // for each system
             if (system->filter_.size() > 0) {
-                system->entities_.clear();
+                system->entities_.clear(); // TODO : Optimize this
                 
-                for (auto& entity : entity_list) { // Compare each entity to the filter list
+                for (auto entity : entity_list_) {  // Compare each entity to the filter list
+                    if (entity->components_.empty() || !entity)
+                        continue;
+                    
                     bool add = false;
                     for (auto& id : system->filter_) {
                         if(!entity->HasComponent(id)) {
@@ -135,6 +153,7 @@ void World::UpdateSystemsEntities() {
                 system->OnEntityListChanged();
             }
         }
+        is_systems_entities_list_dirty_ = false;
     }
 }
     

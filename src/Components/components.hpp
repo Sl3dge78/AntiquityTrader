@@ -46,7 +46,6 @@ struct Transform : public ECS::Component {
     Transform(const int posX = 0, const int posY = 0) {
         position_.x = posX;
         position_.y = posY;
-        parent_ = nullptr;
     };
     ~Transform() = default;
     
@@ -60,18 +59,9 @@ struct Transform : public ECS::Component {
     int     GetPosY()       const { return position_.y; };
     int     GetPositionID() const { return (position_.x + (position_.y * constants::kMapWidth)); };
     
-    //Children management
-    void                        SetParent(ECS::Entity* parent);
-    std::vector<ECS::Entity*>   GetChildren() const;
-    void                        AddChildren(ECS::Entity* child);
-    void                        RemoveChildren(ECS::Entity* child);
-    void                        RemoveAllChildren();
-    
   protected:
     Vector2 position_;
-    
-    ECS::Entity* parent_;
-    std::vector<ECS::Entity*> childs_;
+
 };
     
 struct Rigidbody : public ECS::Component {
@@ -133,7 +123,7 @@ struct Map : public ECS::Component {
  * == GAMEPLAY ==
  */
 
-enum InventoryObjectType { INV_OBJECT_CHOUX, INV_OBJECT_FLEUR };
+enum InventoryObjectType { INV_OBJECT_CHOUX = 0, INV_OBJECT_FLEUR = 1 };
     
 class InventoryObject : public ECS::Component {
   public :
@@ -161,7 +151,9 @@ struct Town : public ECS::Component {
     Town(std::string name) : name_(name) {} ;
     ~Town() = default;
     bool                  is_player_in_ = false;
+    Inventory*            inventory_ = nullptr;
     std::string           name_;
+    ECS::Entity*          ui_ = nullptr;
 };
 
 struct Player : public ECS::Component {
@@ -190,12 +182,12 @@ struct UISelectable : public UIElement { // UI Input handler will move focus to 
     ECS::Entity*    right_;
     
     ALLEGRO_COLOR   GetColor() const { if (has_focus) return focused_color_; else return color_; }
-    std::function<void()> callback_;
+    std::function<void(ECS::Entity*)> callback_;
 };
 
 struct UIPanel : public UIElement {};
 
-    // TODO: Automanaged dynamic text
+    // TODO:
 struct UIText : public UIElement {
     std::string text_;
 };

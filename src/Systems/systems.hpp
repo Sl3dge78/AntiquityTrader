@@ -17,5 +17,6 @@ namespace systems {}
 #include "UI.hpp"
 #include "MapSystem.hpp"
 #include "collision.hpp"
+#include "TownSystem.hpp"
 
 #endif /* systems_hpp */

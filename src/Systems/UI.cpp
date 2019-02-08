@@ -16,22 +16,40 @@ UIDraw::UIDraw() {
     this->pos_z = -5;
 }
 
+void UIDraw::OnEntityListChanged() {
+    entities_.sort([](const ECS::Entity* e1, const ECS::Entity* e2)
+    {
+        return e1->order_ > e2->order_;
+    });
+}
+
 void UIDraw::Draw() {
     for (auto& e : entities_) {
         if (e->GetIsActive()) {
             if (e->HasComponent<components::UIPanel>()) {
                 auto comp = e->GetComponent<components::UIPanel>();
                 ALLEGRO_COLOR color;
-                if (e->HasComponent<components::UISelectable>() && e->GetComponent<components::UISelectable>()->has_focus) {
-                    color = e->GetComponent<components::UISelectable>()->focused_color_;
-                } else color = comp->color_;
+                if (e->HasComponent<components::UISelectable>()) {
+                    color = e->GetComponent<components::UISelectable>()->GetColor();
+                } else {
+                    color = comp->GetColor();
+                }
                 
-                al_draw_filled_rectangle(comp->rect_.x, comp->rect_.y, comp->rect_.width, comp->rect_.height, comp->GetColor());
+                al_draw_filled_rectangle(comp->rect_.x, comp->rect_.y, comp->rect_.x + comp->rect_.width, comp->rect_.y + comp->rect_.height, color);
             }
             
             if (e->HasComponent<components::UIText>()) {
                 auto comp = e->GetComponent<components::UIText>();
-                al_draw_text(font_, comp->GetColor(), comp->rect_.x, comp->rect_.y, ALLEGRO_ALIGN_LEFT, comp->text_.c_str());
+                
+                ALLEGRO_COLOR color;
+                if (e->HasComponent<components::UISelectable>()) {
+                    color = e->GetComponent<components::UISelectable>()->GetColor();
+                } else {
+                    color = comp->GetColor();
+                }
+                
+                al_draw_multiline_text(font_, color, comp->rect_.x, comp->rect_.y, comp->rect_.width, constants::kTileHeight + 1, ALLEGRO_ALIGN_LEFT, comp->text_.c_str());
+                //al_draw_text(font_, comp->GetColor(), comp->rect_.x, comp->rect_.y, ALLEGRO_ALIGN_LEFT, comp->text_.c_str());
             }
         }
     }
@@ -42,6 +60,7 @@ UIInput::UIInput() {
 }
     
 void UIInput::Input(ALLEGRO_EVENT *const ev) {
+    if(ev->type == ALLEGRO_EVENT_KEY_DOWN) {
     for (auto& e : entities_) {
         auto comp = e->GetComponent<components::UISelectable>();
         if (e->GetIsActive() && comp->has_focus){
@@ -77,10 +96,11 @@ void UIInput::Input(ALLEGRO_EVENT *const ev) {
                 case ALLEGRO_KEY_E:
                 case ALLEGRO_KEY_ENTER:
                     if (comp->callback_)
-                        comp->callback_(); //TODO: test this
+                        comp->callback_(e); //TODO: test this
                     break;
             }
         }
+    }
     }
 }
 

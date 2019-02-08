@@ -9,13 +9,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "src/Systems/townUI.cpp"
-            timestampString = "570661258.4365799"
+            filePath = "src/Systems/TownSystem.cpp"
+            timestampString = "571283976.0601259"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
-            landmarkName = "TownUI::Input(ALLEGRO_EVENT* const ev)"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
+            landmarkName = "TownSystem::OnButtonPress(ECS::Entity* caller)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +25,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "src/Systems/townUI.cpp"
-            timestampString = "570661258.442242"
+            filePath = "src/Systems/TownSystem.cpp"
+            timestampString = "571283976.060529"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
-            landmarkName = "TownUI::Input(ALLEGRO_EVENT* const ev)"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
+            landmarkName = "TownSystem::OnButtonPress(ECS::Entity* caller)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -41,93 +41,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "src/Systems/UI.cpp"
-            timestampString = "570671123.647187"
+            filePath = "src/Systems/TownSystem.cpp"
+            timestampString = "571283976.060612"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "21"
-            endingLineNumber = "21"
-            landmarkName = "UIDraw::Draw()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "src/Systems/PlayerSystem.cpp"
-            timestampString = "570671123.647861"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "27"
-            endingLineNumber = "27"
-            landmarkName = "PlayerSystem::Init()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "src/Systems/UI.cpp"
-            timestampString = "570671123.6483639"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "20"
-            endingLineNumber = "20"
-            landmarkName = "UIDraw::Draw()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "systems::UIDraw::Draw()"
-                  moduleName = "AntiquityTrader"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/sledge/Documents/00_Prod/Dev/AntiquityTrader/src/Systems/UI.cpp"
-                  timestampString = "570668212.322147"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "19"
-                  endingLineNumber = "19"
-                  offsetFromSymbolStart = "39">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "systems::UIDraw::Draw()"
-                  moduleName = "AntiquityTrader"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/sledge/Documents/00_Prod/Dev/AntiquityTrader/src/Systems/UI.cpp"
-                  timestampString = "570668212.32959"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "19"
-                  endingLineNumber = "19"
-                  offsetFromSymbolStart = "461">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "src/Systems/UI.cpp"
-            timestampString = "570671123.648656"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "13"
-            endingLineNumber = "13"
-            landmarkName = "UIDraw::UIDraw()"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
+            landmarkName = "TownSystem::CreateUI(ECS::Entity* town)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

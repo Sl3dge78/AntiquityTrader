@@ -26,6 +26,7 @@ namespace systems {
 class UIDraw : public ECS::ISystem, public ECS::DrawSystem {
   public:
     UIDraw();
+    void OnEntityListChanged();
     
     void Draw();
 };
@@ -37,21 +38,6 @@ class UIInput : public ECS::ISystem, public ECS::InputSystem {
     
     void Input(ALLEGRO_EVENT* const ev);
 };
-    
-    
-class TownUI : public ECS::ISystem, public ECS::DrawSystem, public ECS::InputSystem {
-  public:
-    TownUI();
-    
-    void Draw();
-    void Input(ALLEGRO_EVENT* const ev);
-    
-  private:
-    int selection_ = 0;
-    components::InventoryObjectType current_selected_object_;
-    
-};
-    
 }
 
 #endif /* townUI_hpp */

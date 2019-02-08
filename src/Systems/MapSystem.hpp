@@ -30,7 +30,7 @@ class MapSystem : public ECS::ISystem, public ECS::DrawSystem, public ECS::World
     ECS::Entity* map_entity_ = nullptr;
     
   private:
-    std::vector<ECS::Entity*> town_entities_;
+    
     
 };
 

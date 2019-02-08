@@ -13,6 +13,10 @@ namespace ECS
 
 Entity::~Entity() {
     this->Entity::RemoveAllComponents();
+    for (auto e : childs_) {
+        e->parent_ = nullptr;
+    }
+    childs_.clear();
 }
 
 void Entity::RemoveAllComponents() {
@@ -28,7 +32,10 @@ Component* Entity::AddComponent(const int id, Component* comp) {
 }
 
 bool Entity::HasComponent(const int id) const {
-    return (components_.find(id) != components_.end()) ;
+    if (components_.empty() || components_.size() == 0)
+        return false;
+    
+    return (components_.find(id) != components_.end());
 }
 
 Component* Entity::GetComponent(const int id) const {
@@ -41,10 +48,33 @@ Component* Entity::GetComponent(const int id) const {
 }
 
 void Entity::RemoveComponent(const int id) {
-    if(HasComponent(id))
-    {
+    if(HasComponent(id)) {
         delete components_[id];
         components_.erase(id);
+    }
+}
+
+void Entity::SetIsActive(bool val) {
+    is_active_ = val;
+    for (auto& e : childs_)
+        e->SetIsActive(val);
+}
+    
+void Entity::RemoveAllChildren() { 
+    for (auto& e : childs_) {
+        e->parent_ = nullptr;
+    }
+    childs_.clear();
+}
+
+
+void Entity::RemoveChildren(ECS::Entity *child) { 
+    for (auto it = childs_.begin(); it != childs_.end() ; ++it) {
+        if (*it == child) {
+            (*it)->parent_ = nullptr;
+            childs_.erase(it);
+            return;
+        }
     }
 }
 }

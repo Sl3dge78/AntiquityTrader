@@ -40,7 +40,16 @@ class Entity {
     
     void                                            RemoveAllComponents();
     
-    bool                                            GetIsActive() const { return is_active_;};
+    bool                                            GetIsActive() const { return is_active_; };
+    void                                            SetIsActive(bool val);
+    
+    //Children management
+    ECS::Entity*                GetParent() const {return parent_;};
+    std::vector<ECS::Entity*>   GetChildren() const { return childs_; };
+    void                        AddChildren(ECS::Entity* child) { childs_.push_back(child); child->parent_ = this; };
+    void                        RemoveChildren(ECS::Entity* child);
+    void                        RemoveAllChildren();
+    int                         order_ = 0;
     
   protected :
     Component*    AddComponent(const int id, Component* comp);
@@ -48,6 +57,9 @@ class Entity {
     bool          HasComponent(const int id) const;
     void          RemoveComponent(const int id);
     bool          is_active_ = true;
+    
+    ECS::Entity* parent_ = nullptr;
+    std::vector<ECS::Entity*> childs_;
 };
 
 //The following functions are user side functions for adding, getting and removing specific components

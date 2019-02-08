@@ -64,19 +64,9 @@ void MapSystem::Init() {
     auto sec = al_get_first_config_section(townFile, &it);
     
     while(it) {
-        auto town = world_->CreateEntity();
         
         int pos_x = std::stoi(al_get_config_value(townFile, sec, "PosX"));
         int pos_y = std::stoi(al_get_config_value(townFile, sec, "PosY"));
-        string name = al_get_config_value(townFile, sec, "Name");
-        
-        town->AddComponent<components::Town>(name);
-        town->AddComponent<components::Transform>(pos_x, pos_y);
-        town->AddComponent<components::Collider>(components::COLLIDER_FLAG_TOWN);
-        auto inventory = town->AddComponent<components::Inventory>();
-        inventory->inventory_[INV_OBJECT_CHOUX] = 10;
-        inventory->inventory_[INV_OBJECT_FLEUR] = 20;
-        town_entities_.push_back(town);
         
         int position = pos_x + pos_y * mapComponent->width_;
         mapComponent->map[position] = TileType::TILE_TOWN;

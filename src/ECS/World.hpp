@@ -26,6 +26,7 @@ class World {
     //Entities
     Entity* CreateEntity();
     void    DeleteAllEntities();
+    void    DeleteEntity(ECS::Entity* e);
     
     //Systems
     template <class T, class...Args> T* CreateSystem(Args&&...args);
@@ -45,7 +46,7 @@ class World {
     ALLEGRO_BITMAP* main_bitmap_;
     ALLEGRO_FONT*   main_font_;
     
-    std::vector<Entity*> entity_list;
+    std::vector<Entity*> entity_list_;
     
     //Systems
     ISystem* AddSystem(ISystem* sys);

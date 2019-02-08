@@ -24,7 +24,7 @@ struct ObjectRendererSystem : public ECS::ISystem, public ECS::DrawSystem {
     ObjectRendererSystem();
     
     void ChangeFilters();
-    void OnEntityAdded(ECS::Entity* entity);
+    void OnEntityListChanged();
     void Init();
     void Draw();
 };

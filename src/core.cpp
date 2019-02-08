@@ -120,7 +120,7 @@ void Core::Start() {
     world_->CreateSystem<systems::CameraSystem>();
     world_->CreateSystem<systems::Collision>();
     world_->CreateSystem<systems::PlayerSystem>();
-    //world_->CreateSystem<systems::TownUI>();
+    world_->CreateSystem<systems::TownSystem>();
     //world_->CreateSystem<systems::MainUI>();
     world_->CreateSystem<systems::UIDraw>();
     world_->CreateSystem<systems::UIInput>();

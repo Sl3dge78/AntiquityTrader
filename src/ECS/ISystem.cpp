@@ -13,6 +13,7 @@ namespace ECS
 void ISystem::AddEntity(Entity* e) {
     entities_.push_front(e);
     OnEntityAdded(e);
+    OnEntityListChanged();
 }
 
 //Go through all entities, and give only the ones that are activated

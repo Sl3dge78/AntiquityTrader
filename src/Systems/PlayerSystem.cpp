@@ -28,13 +28,13 @@ void PlayerSystem::Init() {
     auto txt = ui_money_->AddComponent<UIText>();
     txt->rect_.x = 8;
     txt->rect_.y = 4;
+    txt->rect_.width = constants::kWindowWidth;
     
     auto blck_bar = world_->CreateEntity();
     auto pnl = blck_bar->AddComponent<UIPanel>();
     pnl->rect_.width = constants::kWindowWidth;
     pnl->rect_.height = 16;
     pnl->color_ = al_map_rgb(0, 0, 0);
-    
 }
 
 void PlayerSystem::Input(ALLEGRO_EVENT* const ev) {
@@ -64,7 +64,7 @@ void PlayerSystem::Input(ALLEGRO_EVENT* const ev) {
                         break;
                     
                     case ALLEGRO_KEY_SPACE : {
-                        player_->GetComponent<components::Player>()->inventory_->AddMoney(10);
+                        player_->GetComponent<components::Player>()->inventory_->AddMoney(100000);
                         break;
                     }
                     default:
@@ -77,9 +77,11 @@ void PlayerSystem::Input(ALLEGRO_EVENT* const ev) {
             switch (ev->keyboard.keycode) {
                 case ALLEGRO_KEY_ENTER:
                     PlayerSystem::Interact();
+                    break;
                 
                 case ALLEGRO_KEY_ESCAPE:
                     PlayerSystem::OnEscPress();
+                    break;
                     
                 default:
                     break;
@@ -94,10 +96,11 @@ void PlayerSystem::Interact() {
     if (player_->GetComponent<components::Collider>()->colliding_flag_ == components::COLLIDER_FLAG_TOWN)
     {
         components::Player* p_comp = player_->GetComponent<components::Player>();
-        if(p_comp->is_in_town_) {
+        if(!p_comp->is_in_town_) {
             p_comp->is_in_town_ = true;
             p_comp->current_town_ = player_->GetComponent<components::Collider>()->colliding_entity_->GetComponent<components::Town>();
             p_comp->current_town_->is_player_in_ = true;
+            //p_comp->current_town_->ui_->SetIsActive(true);
         }
     }
 }
@@ -107,6 +110,7 @@ void PlayerSystem::OnEscPress() {
     if(p_comp->is_in_town_) {
         p_comp->is_in_town_ = false;
         p_comp->current_town_->is_player_in_ = false;
+        //p_comp->current_town_->ui_->SetIsActive(false);
         p_comp->current_town_ = nullptr;
     }
 }
