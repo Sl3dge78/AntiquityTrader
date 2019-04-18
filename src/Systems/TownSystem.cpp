@@ -76,38 +76,48 @@ void TownSystem::CreateUI(ECS::Entity* town) {
     ECS::Entity* previous_entity = nullptr;
     Rect position = Rect{.x = txt->rect_.x, .y = txt->rect_.y + constants::kTileHeight + 1, .width = border->rect_.width, .height = border->rect_.height};
     
-    for (auto& item : town->GetComponent<components::Inventory>()->inventory_) {
-        if (item.second > 0) { // If there are any items in this cat
-            auto item_entity = world_->CreateEntity();
-            item_entity->order_ = -1;
-            town_ui->AddChildren(item_entity);
-            
-            item_entity->AddComponent<components::InventoryObject>(components::kInventoryObjectList[item.first]);
-            
-            auto text = item_entity->AddComponent<components::UIText>();
-            UpdateButton(item_entity);
-            text->rect_ = position;
-            
-            auto button = item_entity->AddComponent<components::UISelectable>();
-            button->rect_ = position;
-            button->focused_color_ = al_map_rgba(255, 128, 0, 255);
-            button->callback_ = std::bind(&TownSystem::OnButtonPress, this, std::placeholders::_1);
-            
-            button->above_ = previous_entity;
-            if (previous_entity)
-                previous_entity->GetComponent<components::UISelectable>()->below_ = item_entity;
-            
-            position.y += constants::kTileHeight + 1;
-            previous_entity = item_entity;
+    if(town->GetComponent<components::Inventory>()->inventory_.size() > 0) {
+        for (auto& item : town->GetComponent<components::Inventory>()->inventory_) {
+            if (item.second > 0) { // If there are any items in this cat
+                auto item_entity = world_->CreateEntity();
+                item_entity->order_ = -1;
+                town_ui->AddChildren(item_entity);
+                
+                item_entity->AddComponent<components::InventoryObject>(components::kInventoryObjectList[item.first]);
+                
+                auto text = item_entity->AddComponent<components::UIText>();
+                UpdateButton(item_entity);
+                text->rect_ = position;
+                
+                auto button = item_entity->AddComponent<components::UISelectable>();
+                button->rect_ = position;
+                button->focused_color_ = al_map_rgba(255, 128, 0, 255);
+                button->callback_ = std::bind(&TownSystem::OnButtonPress, this, std::placeholders::_1);
+                
+                button->above_ = previous_entity;
+                if (previous_entity)
+                    previous_entity->GetComponent<components::UISelectable>()->below_ = item_entity;
+                
+                position.y += constants::kTileHeight + 1;
+                previous_entity = item_entity;
+            }
         }
+        town_ui->GetChildren().front()->GetComponent<components::UISelectable>()->has_focus = true;
+    } else {
+        auto inventory_empty_label = world_->CreateEntity();
+        inventory_empty_label->order_ = -1;
+        town_ui->AddChildren(inventory_empty_label);
+        auto text = inventory_empty_label->AddComponent<components::UIText>();
+        text->rect_ = position;
+        text->text_ = "Inventory is empty!";
     }
     
     town_ui->SetIsActive(true);
-    town_ui->GetChildren().front()->GetComponent<components::UISelectable>()->has_focus = true;
 }
 
 void TownSystem::DestroyUI(ECS::Entity* town) {
     world_->DeleteEntity(town->GetComponent<components::Town>()->ui_);
+    town->GetComponent<components::Town>()->ui_ = nullptr;
 }
 
 void TownSystem::UpdateButton(ECS::Entity* button) {
@@ -119,7 +129,7 @@ void TownSystem::UpdateButton(ECS::Entity* button) {
 }
     
 void TownSystem::OnButtonPress(ECS::Entity* caller) {
-    auto town = caller->GetParent()->GetParent();
+    auto town = caller->GetParent()->GetParent();// Le caller est le bouton qui est dans l'ui panel. Parent du parent. TODO : Rendre ca plus propre ?
     if (town->GetComponent<components::Town>()->is_player_in_) {
         auto player = town->GetComponent<components::Collider>()->colliding_entity_->GetComponent<components::Player>();
         auto object = caller->GetComponent<components::InventoryObject>();
@@ -127,11 +137,22 @@ void TownSystem::OnButtonPress(ECS::Entity* caller) {
             player->inventory_->AddMoney(- object->price_);
             player->inventory_->inventory_[object->type_]++;
             town->GetComponent<components::Inventory>()->inventory_[object->type_]--;
-            UpdateButton(caller);
+            
+            if(town->GetComponent<components::Inventory>()->inventory_[object->type_] <= 0) {
+                town->GetComponent<components::Inventory>()->inventory_.erase(object->type_);
+                
+                // Redraw the whole UI
+                DestroyUI(town);
+                CreateUI(town);
+                
+            } else { // only update the quantity
+                UpdateButton(caller);
+            }
+            
+            
         } else {
             return;
         }
-        
     }
 }
 }

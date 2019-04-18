@@ -30,8 +30,11 @@ namespace systems {
     void Interact();
     void OnEscPress();
     
+    void ToggleInventory();
+    void CreateInventory();
+    void DestroyInventory();
+    
     bool is_in_town_ = false;
-    ECS::Entity* current_town_ = NULL;
     ECS::Entity* player_;
     ECS::Entity* ui_money_;
     

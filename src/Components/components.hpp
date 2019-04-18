@@ -158,8 +158,10 @@ struct Town : public ECS::Component {
 
 struct Player : public ECS::Component {
     bool is_in_town_ = false;
+    bool is_inventory_displayed = false;
     Town* current_town_;
     Inventory* inventory_;
+    ECS::Entity* inventory_ui_;
 };
     
 /*
